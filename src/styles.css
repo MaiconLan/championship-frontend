@@ -1,1 +1,54 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, SansSerif;
+  color: #404C51;
+}
+
+label {
+  font-weight: bold;
+}
+
+.input-label {
+  display: block;
+}
+
+input {
+  width: 100%;
+}
+
+.container {
+  padding: 10px;
+  border-radius: 5px;
+}
+
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+    margin: 0 auto;
+    margin-top: 10px;
+  }
+  .dashboardTop {
+    width: 1170px;
+    margin: 0 auto;
+    margin-top: 100px;
+    text-align: center;
+  }
+}
+
+.dashboardTop {
+  padding: 10px;
+  border-radius: 5px;
+}
+
+a.voltarPesquisa:link {
+  text-decoration:none;
+}
+
+a.voltarPesquisa:visited {
+  text-decoration:none;
+  color: #404C51;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

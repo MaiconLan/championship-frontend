@@ -1,27 +1,34 @@
-# ChampionshipFrontend
+# FacialRecognitionFrontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.4.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.2.
 
-## Development server
+## Servidor de desenvolvimento
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Executar npm install na pasta do pronjeto caso seja a primeira vez que esteja executando.
 
-## Code scaffolding
+Executar `ng serve` para subir a aplicação. Acesso local em `http://localhost:4200/`. O aplicativo vai atualizar automaticamente em caso de alteração de arquivo.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Criar componentes
+
+Executar `ng generate component component-name` para gerar um novo componente. Dá pra usar também `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Execute `ng build` para buildar o projeto. Os arquivos de build vão ficar na pasta `dist/`. Para subir com as variáveis de ambiente de produção, execute com `--prod`.
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+## Frontend local apontando pro backend de produção
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Execute executar desta forma, execute os comandos abaixo:
+* `npm install`
+* `ng build --prod`
+* `npm start`
 
-## Further help
+Feito isso, pode acessar `http://localhost:4200/` e já estará apontado para produção.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Caso ocorra uma demora para logar, aguarde alguns segundos para o servidor de produção subir, pois, o mesmo fica hibernando quando não utilizado por 30 minutos.
+
+Pode ocorrer do servidor não aceitar o ip localhost:4200, conforme mostra a imagem abaixo, aí teria que alterar a propriedade `facialrecognition.seguranca.origin-permitida` do arquivo application.properties na API.
+
+https://prnt.sc/uudspa

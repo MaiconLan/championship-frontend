@@ -1,0 +1,20 @@
+.coluna-codigo {
+  width: 100px;
+  text-align: center;
+}
+
+.coluna-acoes, .coluna-status {
+  width: 150px;
+}
+
+.botao-editar {
+  margin: 1px;
+}
+
+.botao-excluir {
+  margin: 1px;
+}
+
+.coluna-periodo, .coluna-tipo {
+  width: 100px;
+}

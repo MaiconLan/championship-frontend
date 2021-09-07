@@ -1,0 +1,44 @@
+<div class="container">
+  <form #f="ngForm" autocomplete="off">
+    <div class="p-grid">
+      <div class="p-col-12 p-md-12 p-lg-12">
+        <h1>{{editando() ? 'Editar' : 'Cadastrar'}} Professor</h1>
+      </div>
+
+      <div class="p-col-12 p-md-6 p-lg-6">
+        <label style="display: block">Nome:</label>
+        <input pInputText type="text" name="nome" [(ngModel)]="professor.nome" required>
+      </div>
+
+      <div class="p-col-12 p-md-6 p-lg-6">
+        <label style="display: block">E-mail:</label>
+        <input pInputText type="text" name="email" [(ngModel)]="professor.email"/>
+      </div>
+
+      <div class="p-col-12 p-md-6 p-lg-6">
+        <label style="display: block">Usuário:</label>
+        <input pInputText type="text" name="usuario" [(ngModel)]="professor.usuario" required/>
+      </div>
+
+      <div class="p-col-12 p-md-6 p-lg-6">
+        <label style="display: block">Senha:</label>
+        <input type="password" pPassword name="senha" [(ngModel)]="professor.senha" [required]="!editando()" />
+      </div>
+
+      <div class="p-col-12 p-md-12 p-lg-12">
+        <p-selectButton [options]="status" name="status" [(ngModel)]="professor.status" [hidden]="!editando()"></p-selectButton>
+      </div>
+
+      <div class="p-col-12 p-md-12 p-lg-12">
+        <span class="p-buttonset">
+          <button pButton icon="pi pi-save" type="submit" class="p-button-success" label="Salvar"
+                  [disabled]="f.invalid" (click)="salvar()"></button>
+          <button pButton icon="pi pi-plus" type="button" class="p-button-info" label="Novo"
+          (click)="novo(f)"></button>
+        </span>
+        <a routerLink="/professor" class="voltarPesquisa" style="margin-left: 5px; ">Voltar para a pesquisa</a>
+      </div>
+    </div>
+
+  </form>
+</div>

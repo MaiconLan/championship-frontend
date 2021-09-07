@@ -1,0 +1,21 @@
+<div class="dashboardTop">
+  <h1 class="mat-h1">Exportação</h1>
+  <mat-grid-list [cols]="4" class="p-col-12" rowHeight="200px" >
+    <mat-grid-tile *ngFor="let card of cards | async">
+      <a [routerLink]="card.link">
+        <mat-card class="dashboard-card" [style]="card.style">
+          <mat-card-header class="dashboard-card-content">
+            <mat-card-title>
+              <i [class]="card.icon"></i>
+              {{card.title}}
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="dashboard-card-content">
+            <br>
+            <div class="dashboard-card-content-text">{{card.content}}</div>
+          </mat-card-content>
+        </mat-card>
+      </a>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

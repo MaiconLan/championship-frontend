@@ -1,0 +1,25 @@
+<div class="dashboardTop">
+  <h1 class="mat-h1">Dashboard</h1>
+  <mat-grid-list [cols]="4" class="p-col-12" rowHeight="200px" >
+    <mat-grid-tile *ngFor="let card of cards | async">
+      <a (click)="abrirModalDashboard(card)">
+      <mat-card class="dashboard-card" [style]="card.style">
+        <mat-card-header class="dashboard-card-content">
+          <mat-card-title>
+            {{card.title}}
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <br>
+          <div class="numerosDashboard">{{card.numero}}</div>
+        </mat-card-content>
+        <p-dialog header="{{card.title}}"  [modal]="true" [resizable]="false"
+                  [(visible)]="card.mostrarModal"
+                  [closeOnEscape]="true" [draggable]="false"
+                  (onHide)="fecharModalDashboard(card)">
+        </p-dialog>
+      </mat-card>
+      </a>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

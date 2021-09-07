@@ -1,0 +1,50 @@
+<nav class="navbar">
+  <div class="container">
+    <div class="p-grid">
+
+      <div class="p-col-3 p-md-3 p-lg-3">
+        <p-button type="text" (click)="exibindoMenu = true" icon="pi pi-bars" *ngIf="mostrarBotaoMenu() && !exibindoMenu"></p-button>
+
+      </div>
+      <div class="p-col-6 p-md-6 p-lg-6">
+        <a routerLink="/dashboard" class="title"><p class="title">CAMPEONATO MANAGER</p></a>
+      </div>
+    </div>
+  </div>
+
+  <p-sidebar [(visible)]="exibindoMenu" [showCloseIcon]="false" class="sidebar-menu" >
+    <div class="sidebar-menu">
+      <p-button *ngIf="mostrarBotaoMenu()" icon="pi pi-times" [style]="{'float': 'right'}" (click)="exibindoMenu = !exibindoMenu"></p-button>
+
+      <div class="navbar-usuario">
+        {{ authService.jwtPayload?.nome }}
+      </div>
+
+      <div class="navbar-menuitem" routerLinkActive="ativo">
+        <a routerLink="/campeonato" *ngIf="mostrarBotaoMenu()" (click)="exibindoMenu = !exibindoMenu">Campeonatos</a>
+      </div>
+
+      <div class="navbar-menuitem" routerLinkActive="ativo">
+        <a routerLink="/professor" *ngIf="mostrarBotaoMenu()" (click)="exibindoMenu = !exibindoMenu">Professores</a>
+      </div>
+
+      <div class="navbar-menuitem" routerLinkActive="ativo">
+        <a routerLink="/coordenador" *ngIf="mostrarBotaoMenu()" (click)="exibindoMenu = !exibindoMenu">Coordenadores</a>
+      </div>
+
+      <div class="navbar-menuitem" routerLinkActive="ativo">
+        <a routerLink="/turma" *ngIf="mostrarBotaoMenu()" (click)="exibindoMenu = !exibindoMenu">Turmas</a>
+      </div>
+
+      <div class="navbar-menuitem" routerLinkActive="ativo">
+        <a routerLink="/exportacao" *ngIf="mostrarBotaoMenu()" (click)="exibindoMenu = !exibindoMenu">Exportação</a>
+      </div>
+
+      <div class="navbar-menuitem" routerLinkActive="ativo">
+        <a routerLink="#" (click)="logout()">Logout</a>
+      </div>
+
+    </div>
+  </p-sidebar>
+</nav>
+

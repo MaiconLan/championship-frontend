@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiUrl: 'http://localhost:8080/championship',
+  allowedDomains: [/localhost:8080/],
+  disallowedRoutes: [/localhost:8080\/oauth\/token/]
 };
 
 /*

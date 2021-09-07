@@ -1,0 +1,56 @@
+.title {
+  margin-top: 12px;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  text-align:center;
+}
+
+.icon-menu {
+  margin-top: 15px;
+  font-size: 1.3rem;
+}
+
+.navbar {
+  background-color: #1e94d2;
+  padding: 10px 0;
+}
+
+.toggle {
+  color: white;
+}
+
+::ng-deep .p-sidebar {
+  background-color: #3a3633;
+  width: 100%;
+  height: 100%;
+  list-style: none;
+}
+
+::ng-deep .navbar-usuario {
+  padding: 15px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #525151;
+
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #ffff;
+}
+
+::ng-deep .navbar-menuitem {
+  padding: 15px;
+  color: #fff;
+}
+
+::ng-deep .navbar-menuitem a {
+  color: #c0bbb7;
+  text-decoration: none;
+}
+
+::ng-deep .navbar-menuitem a:hover {
+  color: #fff;
+}
+
+::ng-deep .navbar-menuitem.ativo {
+  background-color: #494541;
+}

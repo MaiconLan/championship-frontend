@@ -1,0 +1,13 @@
+
+.aula-modal {
+  width: 100%;
+  height: 100%;
+  z-index: 666;
+}
+
+@media screen and (max-width: 40em) {
+  .aula-modal {
+    width: 50%;
+    height: 50%;
+  }
+}

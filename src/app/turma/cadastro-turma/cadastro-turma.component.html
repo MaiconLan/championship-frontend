@@ -1,0 +1,77 @@
+<div class="container">
+  <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar()">
+    <div class="p-grid">
+      <div class="p-col-12 p-md-12 p-lg-12">
+        <h1>{{editando() ? 'Editar' : 'Cadastrar'}} Turma</h1>
+      </div>
+
+      <div class="p-col-12 p-md-6 p-lg-4">
+        <label style="display: block">Matéria:</label>
+        <input pInputText type="text" name="nome" [(ngModel)]="turma.materia" required>
+      </div>
+
+
+      <div class="p-col-12 p-md-3 p-lg-3">
+        <label style="display: block">Ano:</label>
+        <p-inputNumber name="ano" [(ngModel)]="turma.ano" mode="decimal" [style]="{ width: '100%' }"
+                       inputId="withoutgrouping" [useGrouping]="false"></p-inputNumber>
+      </div>
+
+      <div class="p-col-12 p-md-3 p-lg-3">
+        <label style="display: block">Período:</label>
+        <input pInputText type="text" name="periodo" [(ngModel)]="turma.periodo"/>
+      </div>
+
+      <div class="p-col-12 p-md-6 p-lg-4">
+        <label style="display: block">Professor: </label>
+        <p-dropdown id="professor" name="professor" [style]="{ width: '100%' }"
+                    [options]="professores" [(ngModel)]="turma.professor" [showClear]="true" required></p-dropdown>
+      </div>
+
+      <div class="p-col-12 p-md-3 p-lg-3">
+        <label for="tipo" class="input-label">Tipo</label>
+        <p-dropdown id="tipo" name="tipo" [style]="{ width: '100%' }"
+                    [options]="tipos" [(ngModel)]="turma.tipo" [showClear]="true"></p-dropdown>
+      </div>
+
+      <div class="p-col-12 p-md-1 p-lg-1">
+        <label for="finalizada" class="input-label">Finalizada</label>
+        <p-checkbox id="finalizada" name="finalizada" [(ngModel)]="turma.finalizada" [binary]="true"
+                    [style]="{'margin': '10px'}"></p-checkbox>
+      </div>
+
+      <div class="p-col-12 p-md-12 p-lg-12">
+        <label style="display: block">Alunos: </label>
+        <p-pickList #pl [source]="alunos" [target]="turma.alunos"
+                    dragdrop="true" [responsive]="true"
+                    sourceFilterPlaceholder="Filtrar por nome" targetFilterPlaceholder="Filtrar por nome"
+                    sourceHeader="Não vinculados" targetHeader="Vinculados">
+          <ng-template let-alu pTemplate="item">
+            <div>
+              <div style="font-size:14px;font-weight: bold;margin:5px 5px 0 0">
+                <i class="pi pi-user" style="margin-right: 10px"></i>{{alu.nome}}
+                <i class="pi pi-id-card" style="margin: 10px 10px"></i>{{alu.matricula}}
+              </div>
+              <div style="font-size:14px;margin:15px 5px 0 0">
+                <i class="pi pi-envelope" style="margin-right: 10px"></i>{{alu.email}}
+              </div>
+            </div>
+          </ng-template>
+        </p-pickList>
+      </div>
+
+      <div class="p-col-12 p-md-12 p-lg-12">
+        <span class="p-buttonset">
+          <button pButton icon="pi pi-save" type="submit" class="p-button-success" label="Salvar"
+                  [disabled]="f.invalid"></button>
+          <button pButton icon="pi pi-plus" type="button" class="p-button-info" label="Novo"
+                  (click)="novo(f)"></button>
+          <button pButton icon="pi pi-calendar" type="button" class="p-button-help" label="Calendário"
+                  *ngIf="editando()"
+                   (click)="acessarCalendario(turma)"></button>
+        </span>
+        <a routerLink="/turma" style="margin-left: 5px;" class="voltarPesquisa">Voltar para a pesquisa</a>
+      </div>
+    </div>
+  </form>
+</div>

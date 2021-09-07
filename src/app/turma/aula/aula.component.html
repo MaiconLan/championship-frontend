@@ -1,0 +1,143 @@
+<div class="container">
+  <div class="p-grid">
+    <div class="p-col-12 p-md-12 p-lg-12">
+      <a style="text-decoration: none" [routerLink]="urlTurma">Voltar</a>
+    </div>
+    <div class="p-col-12 p-md-12 p-lg-12">
+      <h2>{{aula?.title}} - {{aula?.date | date: 'dd/MM/yyy'}}</h2>
+    </div>
+    <div class="p-col-6 p-md-3 p-lg-2">
+      <h4>Início: {{aula?.start}}</h4>
+    </div>
+    <div class="p-col-6 p-md-3 p-lg-2">
+      <h4>Término: {{aula?.end}}</h4>
+    </div>
+  </div>
+
+  <div class="p-grid">
+    <div class="p-col-12 p-md-12 p-lg-12">
+      <div class="p-1">
+        <video #video class="video" autoplay [hidden]="false"></video>
+      </div>
+    </div>
+    <div class="p-col-12 p-md-3 p-lg-2">
+      <form #f="ngForm" autocomplete="off" (ngSubmit)="iniciarAula()">
+        <button pButton icon="pi pi-video" type="submit"
+                class="p-button-sucess p-button-rounded"
+                label="Iniciar Aula"></button>
+      </form>
+    </div>
+
+    <div class="p-col-12 p-md-3 p-lg-3">
+      <button pButton icon="pi pi-list" type="submit"
+              class="p-button-warning p-button-rounded"
+              label="Não reconhecidos" (click)="buscarNaoReconhecidos()"></button>
+    </div>
+    <div class="p-col-12 p-md-3 p-lg-3">
+        <button pButton icon="pi pi-file" class="p-button-success p-button-rounded" label="Exportar aula"
+                (click)="exportarAula()"></button>
+    </div>
+    <div class="p-col-12 p-md-6 p-lg-6">
+      <canvas #canvas [hidden]="true"></canvas>
+    </div>
+  </div>
+
+  <div class="p-grid">
+    <div class="p-col-12 p-md-12 p-lg-12">
+      <p-table [value]="aula?.presencas"
+               [paginator]="true"
+               [lazy]="true"
+               (onLazyLoad)="aoMudarPagina($event)"
+               [loading]="loading"
+               [totalRecords]="totalRegistros"
+               [showCurrentPageReport]="true"
+               currentPageReportTemplate="{first} de 2 em um total de {totalRecords} registros"
+               [rowsPerPageOptions]="[10,25,50]"
+               [responsive]="true">
+        <ng-template pTemplate="caption">
+          <div style="text-align: center">
+            Lista de presença
+          </div>
+        </ng-template>
+
+        <ng-template pTemplate="header">
+          <tr>
+            <th class="coluna-codigo">Código</th>
+            <th>Matrícula</th>
+            <th>Nome</th>
+            <th class="coluna-periodo">Presença</th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-presenca>
+          <tr>
+            <td>{{presenca.aluno.idAluno}}</td>
+            <td>{{presenca.aluno.matricula}}</td>
+            <td>{{presenca.aluno.nome}}</td>
+            <td>
+              <p-checkbox name="presenca" [(ngModel)]="presenca.presenca" [binary]="true" disabled="true"
+                          [style]="{'margin': '10px'}"></p-checkbox>
+            </td>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td [attr.colspan]="4">
+              Nenhum registro encontrado.
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>
+
+<p-dialog [style]="{'max-width': '90%', 'max-height': '90%'}" header="Lista de rostos não reconhecidos"
+          [(visible)]="mostrarModalNaoReconhecidos"
+          [modal]="true"
+          [resizable]="false"
+          [closeOnEscape]="true" [draggable]="false">
+  <div class="container">
+    <div class="p-grid">
+      <div class="p-col-12 p-md-12 p-lg-12">
+        <p-table [value]="rostosNaoReconhecidos"
+                 [paginator]="true"
+                 [lazy]="true"
+                 [totalRecords]="rostosNaoReconhecidos.length"
+                 [showCurrentPageReport]="true"
+                 currentPageReportTemplate="{first} de 2 em um total de {totalRecords} registros"
+                 [rowsPerPageOptions]="[10,25,50]"
+                 [responsive]="true">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Nome</th>
+              <th>Foto</th>
+              <th>Aluno</th>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="body" let-foto>
+            <tr>
+              <td>{{foto.nome}}</td>
+              <td>
+                <img src="data:image/jpeg;base64,{{foto?.foto}}" id="id-foto" width="150" height="150"/>
+              </td>
+              <td>
+                <p-dropdown id="aluno" name="aluno" [style]="{ width: '100%' }"
+                            [options]="alunos" [(ngModel)]="foto.aluno" [showClear]="true" required></p-dropdown>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+
+      <div class="p-col-12 p-md-4 p-lg-3">
+        <button pButton icon="pi pi-check" type="submit"
+                class="p-button-success p-button-rounded"
+                [disabled]="!alunos"
+                label="Salvar" (click)="salvarRostosReconhecidos()"></button>
+      </div>
+    </div>
+  </div>
+</p-dialog>
