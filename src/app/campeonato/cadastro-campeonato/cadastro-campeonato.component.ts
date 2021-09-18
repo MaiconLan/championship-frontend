@@ -116,10 +116,6 @@ export class CadastroCampeonatoComponent implements OnInit {
   }
 
   novoJogador(): void {
-    setTimeout(function(): void {
-      console.log();
-    }.bind(this), 1);
-
     this.router.navigate(['campeonato', this.campeonato.idCampeonato, 'jogador', 'novo']);
   }
 
@@ -158,5 +154,9 @@ export class CadastroCampeonatoComponent implements OnInit {
       acceptButtonStyleClass: 'p-button-info p-button-rounded',
       rejectButtonStyleClass: 'botao-excluir p-button-danger p-button-rounded'
     });
+  }
+
+  acessarPartidas(): void {
+    this.router.navigate(['..', 'campeonato', this.campeonato.idCampeonato, 'partida']);
   }
 }

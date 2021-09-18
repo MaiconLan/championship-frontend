@@ -32,7 +32,6 @@ export class CadastroJogadorComponent implements OnInit {
     this.title.setTitle('Cadastro de jogador');
     this.idCampeonato = this.rout.snapshot.params.idCampeonato;
     const idJogador = this.rout.snapshot.params.idJogador;
-    console.log('campeonato: ', this.idCampeonato);
 
     if (idJogador) {
       this.buscar(idJogador);

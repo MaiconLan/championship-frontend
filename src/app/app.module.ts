@@ -39,6 +39,7 @@ import {DropdownModule} from "primeng/dropdown";
 import {CoordenadorModule} from "./coordenador/coordenador.module";
 import {CampeonatoModule} from './campeonato/campeonato.module';
 import {JogadorModule} from './jogador/jogador.module';
+import {PartidaModule} from './partida/partida.module';
 
 @NgModule({
   declarations: [
@@ -83,6 +84,7 @@ import {JogadorModule} from './jogador/jogador.module';
     FormsModule,
     DropdownModule,
     CoordenadorModule,
+    PartidaModule,
   ],
   providers: [
     MessageService,

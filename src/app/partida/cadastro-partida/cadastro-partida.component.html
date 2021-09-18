@@ -5,16 +5,12 @@
         <h1>{{editando() ? 'Editar' : 'Cadastrar'}} Campeonato</h1>
       </div>
 
-      <div class="p-col-12 p-md-6 p-lg-4">
-        <label style="display: block">Nome:</label>
-        <input pInputText type="text" name="nome" [(ngModel)]="campeonato.nome" required>
-      </div>
-
       <div class="p-col-12 p-md-4 p-lg-4">
-        <label style="display: block">Início:</label>
-        <p-calendar [(ngModel)]="campeonato.inicio" [style]="{'width': '100%'}"
+        <label style="display: block">Data:</label>
+        <p-calendar [(ngModel)]="partida.inicio" [style]="{'width': '100%'}"
                     name="inicio"
                     [showIcon]="true" dateFormat="dd/mm/yy"
+                    [showTime]="true"
                     required></p-calendar>
       </div>
 
@@ -24,12 +20,6 @@
                     name="termino"
                     showIcon="true" dateFormat="dd/mm/yy"></p-calendar>
       </div>
-
-      <div class="p-col-12 p-md-12 p-lg-12">
-        <p-selectButton [(ngModel)]="campeonato.finalizado" name="finalizado" [options]="status"
-                        [hidden]="!editando()"></p-selectButton>
-      </div>
-
 
       <div class="p-col-12 p-md-12 p-lg-12">
         <span style="margin-right: 10px">
@@ -42,11 +32,6 @@
                   (click)="novoJogador()"
                   [disabled]="f.invalid"></button>
         </span>
-        <span style="margin-right: 10px">
-           <button pButton pTooltip="Partidas" tooltipPosition="top" icon="pi pi-calendar"
-                   class="p-button-help p-button-rounded"
-                   (click)="acessarPartidas()"></button>
-        </span>
         <a routerLink="/campeonato" style="margin-left: 5px;" class="voltarPesquisa">Voltar para a pesquisa</a>
       </div>
     </div>
@@ -54,19 +39,16 @@
   <div class="p-grid">
     <div class="p-col-12 p-md-12 p-lg-12">
       <p-table [hidden]="!editando()"
-               [value]="jogadores"
+               [value]="pontuacoes"
                [loading]="loading"
                [paginator]="true"
                [lazy]="true"
-               [totalRecords]="quantidadeJogadores"
-               [rows]="10"
                [showCurrentPageReport]="true"
                currentPageReportTemplate="{first} de {last} em um total de {totalRecords} registros"
-               [rowsPerPageOptions]="[10,25,50]"
                [responsive]="true">
         <ng-template pTemplate="caption">
           <div style="text-align: center">
-            Lista de jogadores
+            Lista de pontuações
           </div>
         </ng-template>
 
@@ -75,22 +57,20 @@
             <th class="coluna-codigo">Código</th>
             <th>Nome</th>
             <th>Número</th>
-            <th class="coluna-acoes">Ações</th>
+            <th>Gol</th>
+            <th>Assitência</th>
+            <th>Vitória</th>
           </tr>
         </ng-template>
 
-        <ng-template pTemplate="body" let-jogador>
+        <ng-template pTemplate="body" let-pontuacao>
           <tr>
-            <td>{{jogador.idJogador}}</td>
-            <td>{{jogador.nome}}</td>
-            <td>{{jogador.numero}}</td>
-            <td>
-              <a pButton pTooltip="Editar" tooltipPosition="top" icon="pi pi-pencil"
-                 class="botao-editar p-button-rounded" [routerLink]="['jogador', jogador.idJogador]"></a>
-              <button pButton pTooltip="Excluir" tooltipPosition="top" icon="pi pi-trash"
-                      class="botao-excluir p-button-danger p-button-rounded"
-                      (click)="confirmarExclusaoJogador(jogador)"></button>
-            </td>
+            <td>{{pontuacao.idJogador}}</td>
+            <td>{{pontuacao.nome}}</td>
+            <td>{{pontuacao.numero}}</td>
+            <td>{{pontuacao.gol}}</td>
+            <td>{{pontuacao.assitencia}}</td>
+            <td>{{pontuacao.vitoria}}</td>
           </tr>
         </ng-template>
 
