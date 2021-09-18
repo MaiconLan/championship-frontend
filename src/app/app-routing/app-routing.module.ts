@@ -19,6 +19,7 @@ import {CadastroCoordenadorComponent} from "../coordenador/cadastro-coordenador/
 import {ListaCoordenadorComponent} from "../coordenador/lista-coordenador/lista-coordenador.component";
 import {ListaCampeonatoComponent} from '../campeonato/lista-campeonato/lista-campeonato.component';
 import {CadastroCampeonatoComponent} from '../campeonato/cadastro-campeonato/cadastro-campeonato.component';
+import {CadastroJogadorComponent} from '../jogador/cadastro-jogador/cadastro-jogador.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -26,7 +27,9 @@ const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
   {path: 'campeonato', component: ListaCampeonatoComponent, canActivate: [AuthGuard]},
   {path: 'campeonato/novo', component: CadastroCampeonatoComponent, canActivate: [AuthGuard]},
-  {path: 'campeonato/:id', component: CadastroCampeonatoComponent, canActivate: [AuthGuard]},
+  {path: 'campeonato/:idCampeonato', component: CadastroCampeonatoComponent, canActivate: [AuthGuard]},
+  {path: 'campeonato/:idCampeonato/jogador/novo', component: CadastroJogadorComponent, canActivate: [AuthGuard]},
+  {path: 'campeonato/:idCampeonato/jogador/:idJogador', component: CadastroJogadorComponent, canActivate: [AuthGuard]},
 
   {path: 'aluno', component: ListaAlunoComponent, canActivate: [AuthGuard]},
   {path: 'aluno/novo', component: CadastroAlunoComponent, canActivate: [AuthGuard]},

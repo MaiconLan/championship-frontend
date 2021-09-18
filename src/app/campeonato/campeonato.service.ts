@@ -82,4 +82,31 @@ export class CampeonatoService {
         return Promise.reject(error);
       });
   }
+
+
+  excluir(id: number): Promise<void> {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json');
+
+    return this.http.delete(`${this.url}/${id}`, {headers})
+      .toPromise()
+      .then(() => null)
+      .catch(error => {
+        return Promise.reject(error);
+      });
+  }
+
+  listarJogadores(id: number): Promise<any> {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json');
+
+    return this.http.get<any>(`${this.url}/${id}/jogador`, {headers})
+      .toPromise()
+      .then(response => {
+        return response;
+      })
+      .catch(error => {
+        return Promise.reject(error);
+      });
+  }
 }

@@ -38,6 +38,7 @@ import {ExportacaoComponent} from './exportacao/exportacao/exportacao.component'
 import {DropdownModule} from "primeng/dropdown";
 import {CoordenadorModule} from "./coordenador/coordenador.module";
 import {CampeonatoModule} from './campeonato/campeonato.module';
+import {JogadorModule} from './jogador/jogador.module';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import {CampeonatoModule} from './campeonato/campeonato.module';
     SelectButtonModule,
     AlunoModule,
     CampeonatoModule,
+    JogadorModule,
     CoreModule,
     ProfessorModule,
     ConfirmDialogModule,

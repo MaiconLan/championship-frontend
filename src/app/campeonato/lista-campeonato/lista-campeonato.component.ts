@@ -56,7 +56,29 @@ export class ListaCampeonatoComponent implements OnInit {
     this.consultar(pagina);
   }
 
-  confirmarExclusao(aluno: any): void {
-    console.log('Removido');
+  confirmarExclusao(campeonato: any): void {
+    this.confirmation.confirm({
+      icon: 'pi pi-info-circle',
+      header: 'Confirmar exclusão!',
+      message: 'Você tem certeza de que deseja excluir? Todos os dados serão perdidos.',
+      accept: () => {
+        this.excluir(campeonato);
+      },
+      acceptLabel: 'Sim',
+      rejectLabel: 'Não',
+      acceptButtonStyleClass: 'p-button-info p-button-rounded',
+      rejectButtonStyleClass: 'botao-excluir p-button-danger p-button-rounded'
+    });
+  }
+
+  excluir(campeonato: any): void {
+    this.loading = true;
+    this.campeonatoService.excluir(campeonato.idCampeonato).then(() => {
+      this.consultar(this.filtro.pagina);
+      this.handler.addSuccess('Sucesso', 'Registro excluído com sucesso');
+    }).catch(error => {
+      this.handler.handle(error);
+    });
+    this.loading = false;
   }
 }

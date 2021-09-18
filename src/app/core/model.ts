@@ -61,3 +61,12 @@ export class Campeonato {
   constructor() {
   }
 }
+
+export class Jogador {
+  idJogador: number;
+  nome: string;
+  numero: number;
+
+  constructor() {
+  }
+}
