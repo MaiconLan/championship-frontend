@@ -47,7 +47,7 @@
             <td>{{partida.inicio}}</td>
             <td>
               <a pButton pTooltip="Editar" tooltipPosition="top" icon="pi pi-pencil"
-                 class="botao-editar p-button-rounded" [routerLink]="['/partida', partida.idPartida]"></a>
+                 class="botao-editar p-button-rounded" [routerLink]="[partida.idPartida]"></a>
               <button pButton pTooltip="Excluir" tooltipPosition="top" icon="pi pi-trash"
                       class="botao-excluir p-button-danger p-button-rounded"
                       (click)="confirmarExclusao(partida)"></button>

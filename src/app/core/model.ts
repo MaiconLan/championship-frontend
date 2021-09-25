@@ -70,3 +70,25 @@ export class Jogador {
   constructor() {
   }
 }
+
+export class Partida {
+  idPartida: number;
+  inicio: Date;
+
+  constructor() {
+  }
+}
+
+export class Pontuacao {
+  idPontuacao: number;
+  idJogador: number;
+  numero: number;
+  nome: string;
+  gol: number;
+  assistencia: number;
+  pontuacao: number;
+  vitoria: boolean;
+
+  constructor() {
+  }
+}

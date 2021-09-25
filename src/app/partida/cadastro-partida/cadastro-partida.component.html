@@ -2,7 +2,7 @@
   <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar()">
     <div class="p-grid">
       <div class="p-col-12 p-md-12 p-lg-12">
-        <h1>{{editando() ? 'Editar' : 'Cadastrar'}} Campeonato</h1>
+        <h1>{{editando() ? 'Editar' : 'Cadastrar'}} Partida</h1>
       </div>
 
       <div class="p-col-12 p-md-4 p-lg-4">
@@ -14,22 +14,15 @@
                     required></p-calendar>
       </div>
 
-      <div class="p-col-12 p-md-4 p-lg-4">
-        <label style="display: block">Término:</label>
-        <p-calendar [(ngModel)]="campeonato.termino" [style]="{'width': '100%'}"
-                    name="termino"
-                    showIcon="true" dateFormat="dd/mm/yy"></p-calendar>
-      </div>
-
       <div class="p-col-12 p-md-12 p-lg-12">
         <span style="margin-right: 10px">
           <button pButton icon="pi pi-save" type="submit" class="p-button-success p-button-rounded" label="Salvar"
                   [disabled]="f.invalid"></button>
         </span>
         <span style="margin-right: 10px">
-          <button pButton icon="pi pi-user" type="submit" class="p-button-warning p-button-rounded"
-                  label="Novo Jogador"
-                  (click)="novoJogador()"
+          <button pButton icon="pi pi-calendar" type="submit" class="p-button-warning p-button-rounded"
+                  label="Nova Partida"
+                  (click)="novaPartida(f)"
                   [disabled]="f.invalid"></button>
         </span>
         <a routerLink="/campeonato" style="margin-left: 5px;" class="voltarPesquisa">Voltar para a pesquisa</a>
@@ -43,8 +36,11 @@
                [loading]="loading"
                [paginator]="true"
                [lazy]="true"
+               [totalRecords]="quantidadePontuacoes"
+               [rows]="10"
                [showCurrentPageReport]="true"
                currentPageReportTemplate="{first} de {last} em um total de {totalRecords} registros"
+               [rowsPerPageOptions]="[10,25,50]"
                [responsive]="true">
         <ng-template pTemplate="caption">
           <div style="text-align: center">
@@ -54,23 +50,36 @@
 
         <ng-template pTemplate="header">
           <tr>
-            <th class="coluna-codigo">Código</th>
+            <th class="coluna-codigo">Posição</th>
             <th>Nome</th>
-            <th>Número</th>
             <th>Gol</th>
-            <th>Assitência</th>
+            <th>Assistência</th>
+            <th>Pontuação</th>
             <th>Vitória</th>
+            <th class="coluna-acoes">Ações</th>
           </tr>
         </ng-template>
 
         <ng-template pTemplate="body" let-pontuacao>
           <tr>
-            <td>{{pontuacao.idJogador}}</td>
-            <td>{{pontuacao.nome}}</td>
-            <td>{{pontuacao.numero}}</td>
+            <td><button disabled pButton type="button" label="{{pontuacoes.indexOf(pontuacao) + 1 + 'º'}}"
+                        class="{{getPosicaoStyle(pontuacao)}} p-button-raised p-button-rounded"></button></td>
+            <td>{{pontuacao.numero}} - {{pontuacao.nome}}</td>
             <td>{{pontuacao.gol}}</td>
-            <td>{{pontuacao.assitencia}}</td>
-            <td>{{pontuacao.vitoria}}</td>
+            <td>{{pontuacao.assistencia}}</td>
+            <td>{{pontuacao.pontuacao}}</td>
+            <td [hidden]="!pontuacao.vitoria">
+              <button disabled pButton type="button" icon="pi pi-check"
+                      class="p-button-success p-button-raised p-button-rounded p-button-outlined"></button>
+            </td>
+            <td [hidden]="pontuacao.vitoria">
+              <button disabled pButton type="button" icon="pi pi-times"
+                      class="p-button-danger p-button-raised p-button-rounded p-button-outlined"></button>
+            </td>
+            <td>
+              <a pButton pTooltip="Editar" tooltipPosition="top" icon="pi pi-pencil"
+                 class="botao-editar p-button-rounded" (click)="mostrarModalEditar(pontuacao)"></a>
+            </td>
           </tr>
         </ng-template>
 
@@ -84,4 +93,34 @@
       </p-table>
     </div>
   </div>
+
+  <p-dialog [style]="{'max-width': '90%', 'max-height': '90%'}" header="Pontuação" [(visible)]="modalEditar" [modal]="true"
+            [resizable]="false"
+            [closeOnEscape]="true" [draggable]="false">
+    <div class="container">
+      <div class="p-grid">
+        <div class="p-col-12 p-md-4 p-lg-3">
+          <label style="display: block">Jogador:</label>
+          <label>{{pontuacao.numero}} - {{pontuacao.nome}}</label>
+        </div>
+        <div class="p-col-12 p-md-4 p-lg-3">
+          <label style="display: block">Gol:</label>
+          <input pInputText type="text" name="nome" [(ngModel)]="pontuacao.gol">
+        </div>
+        <div class="p-col-12 p-md-4 p-lg-3">
+          <label style="display: block">Assistência:</label>
+          <input pInputText type="text" name="nome" [(ngModel)]="pontuacao.assistencia">
+        </div>
+        <div class="p-col-12 p-md-4 p-lg-3">
+          <label style="display: block">Status:</label>
+          <p-selectButton [options]="statusPontuacao" [(ngModel)]="pontuacao.vitoria"></p-selectButton>
+        </div>
+
+        <div class="p-col-12 p-md-12 p-lg-12">
+          <button pButton icon="pi pi-save" type="submit" class="p-button-success p-button-rounded" label="Salvar"
+                  (click)="salvarPontuacao()"></button>
+        </div>
+      </div>
+    </div>
+  </p-dialog>
 </div>

@@ -10,6 +10,8 @@ import {FormsModule} from '@angular/forms';
 import { CadastroPartidaComponent } from './cadastro-partida/cadastro-partida.component';
 import {CalendarModule} from 'primeng/calendar';
 import {InputTextModule} from 'primeng/inputtext';
+import {DialogModule} from 'primeng/dialog';
+import {SelectButtonModule} from 'primeng/selectbutton';
 
 
 @NgModule({
@@ -22,7 +24,9 @@ import {InputTextModule} from 'primeng/inputtext';
     TableModule,
     TooltipModule,
     CalendarModule,
-    InputTextModule
+    InputTextModule,
+    DialogModule,
+    SelectButtonModule
   ], providers: [MessageService, ConfirmationService]
 })
 export class PartidaModule {
