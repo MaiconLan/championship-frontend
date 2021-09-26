@@ -67,7 +67,6 @@ export class CadastroCampeonatoComponent implements OnInit {
 
   criar(): void {
     this.campeonatoService.criar(this.campeonato).then(campeonato => {
-      console.log(campeonato);
       this.handler.addSuccess('Criado', 'Registro criado com sucesso');
       this.router.navigate(['campeonato', campeonato.idCampeonato]);
     }).catch(error => {
@@ -96,7 +95,7 @@ export class CadastroCampeonatoComponent implements OnInit {
       clear: 'Limpar',
       dateFormat: 'mm/dd/yy',
       weekHeader: 'Sem',
-      timezone: 'America/Sao_Paulo',
+      timezone: 'UTC',
       locale: 'pt'
     };
   }
@@ -132,8 +131,8 @@ export class CadastroCampeonatoComponent implements OnInit {
   converter(response: any): void {
     this.campeonato.idCampeonato = response.idCampeonato;
     this.campeonato.nome = response.nome;
-    this.campeonato.inicio = new Date(response.inicio);
-    this.campeonato.termino = new Date(response.termino);
+    this.campeonato.inicio = new Date(response.inicio + 'T03:00:00Z');
+    this.campeonato.termino = new Date(response.termino + 'T03:00:00Z');
     this.campeonato.finalizado = Boolean(response.finalizado);
   }
 

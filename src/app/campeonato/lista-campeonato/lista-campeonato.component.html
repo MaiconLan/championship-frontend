@@ -39,8 +39,8 @@
             <th>Nome</th>
             <th>Início</th>
             <th>Término</th>
-            <th>Finalizado</th>
-            <th class="coluna-acoes">Ações</th>
+            <th>Status</th>
+            <th>Ações</th>
           </tr>
         </ng-template>
 
@@ -50,14 +50,21 @@
             <td>{{campeonato.nome}}</td>
             <td>{{campeonato.inicio}}</td>
             <td>{{campeonato.termino}}</td>
-            <td>{{campeonato.finalizado}}</td>
-            <td class="coluna-acoes">
+            <td [hidden]="!campeonato.finalizado">
+              <button disabled pButton type="button" label="Em andamento"
+                      class="p-button-success p-button-raised p-button-rounded p-button-outlined"></button>
+            </td>
+            <td [hidden]="campeonato.finalizado">
+              <button disabled pButton type="button" label="Finalizado"
+                      class="p-button-danger p-button-raised p-button-rounded p-button-outlined"></button>
+            </td>
+            <td>
               <a pButton pTooltip="Editar" tooltipPosition="top" icon="pi pi-pencil"
                  class="botao-editar p-button-rounded" [routerLink]="[campeonato.idCampeonato]"></a>
               <button pButton pTooltip="Excluir" tooltipPosition="top" icon="pi pi-trash"
                       class="botao-excluir p-button-danger p-button-rounded"
                       (click)="confirmarExclusao(campeonato)"></button>
-              <a pButton pTooltip="Tabela" tooltipPosition="top" icon="pi pi-table"
+              <a pButton pTooltip="Tabela geral do campeonato" tooltipPosition="top" icon="pi pi-table"
                  class="botao-editar p-button-rounded p-button-help"
                  [routerLink]="[campeonato.idCampeonato, 'tabela']"></a>
             </td>

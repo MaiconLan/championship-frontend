@@ -47,7 +47,7 @@
         <ng-template pTemplate="body" let-partida>
           <tr>
             <td>{{partida.idPartida}}</td>
-            <td>{{partida.inicio | date : 'dd/MM/yyyy HH:mm'}}</td>
+            <td>{{partida.inicio | date : 'dd/MM/yyyy HH:mm'  : '-0300' }}</td>
             <td>
               <a pButton pTooltip="Editar" tooltipPosition="top" icon="pi pi-pencil"
                  class="botao-editar p-button-rounded" [routerLink]="[partida.idPartida]"></a>
