@@ -60,7 +60,7 @@ export class CadastroPartidaComponent implements OnInit {
   atualizar(): void {
     this.partidaService.atualizar(this.idCampeonato, this.partida)
       .then(response => {
-        this.partida = response;
+        this.partida = this.converter(response);
         this.buscarPontuacoes(this.partida.idPartida);
       }).catch(error => {
       this.handler.handle(error);
@@ -71,7 +71,7 @@ export class CadastroPartidaComponent implements OnInit {
   criar(): void {
     this.partidaService.criar(this.idCampeonato, this.partida)
       .then(response => {
-        this.partida = response;
+        this.partida = this.converter(response);
         this.buscarPontuacoes(this.partida.idPartida);
       }).catch(error => {
       this.handler.handle(error);

@@ -109,4 +109,18 @@ export class CampeonatoService {
         return Promise.reject(error);
       });
   }
+
+  buscarTabela(id: number): Promise<any> {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json');
+
+    return this.http.get<any>(`${this.url}/${id}/tabela`, {headers})
+      .toPromise()
+      .then(response => {
+        return response;
+      })
+      .catch(error => {
+        return Promise.reject(error);
+      });
+  }
 }

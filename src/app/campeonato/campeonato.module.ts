@@ -14,11 +14,12 @@ import {CalendarModule} from 'primeng/calendar';
 import {InputTextModule} from 'primeng/inputtext';
 import {SelectButtonModule} from 'primeng/selectbutton';
 import {PickListModule} from 'primeng/picklist';
+import { TabelaComponent } from './tabela/tabela.component';
 
 
 
 @NgModule({
-  declarations: [ListaCampeonatoComponent, CadastroCampeonatoComponent],
+  declarations: [ListaCampeonatoComponent, CadastroCampeonatoComponent, TabelaComponent],
     imports: [
         CommonModule,
         ButtonModule,

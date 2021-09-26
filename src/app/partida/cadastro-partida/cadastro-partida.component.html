@@ -25,7 +25,7 @@
                   (click)="novaPartida(f)"
                   [disabled]="f.invalid"></button>
         </span>
-        <a routerLink="/campeonato" style="margin-left: 5px;" class="voltarPesquisa">Voltar para a pesquisa</a>
+        <a [routerLink]="['/campeonato', idCampeonato, 'partida']" style="margin-left: 5px;" class="voltarPesquisa">Voltar para partidas</a>
       </div>
     </div>
   </form>
@@ -50,7 +50,6 @@
 
         <ng-template pTemplate="header">
           <tr>
-            <th class="coluna-codigo">Posição</th>
             <th>Nome</th>
             <th>Gol</th>
             <th>Assistência</th>
@@ -62,8 +61,6 @@
 
         <ng-template pTemplate="body" let-pontuacao>
           <tr>
-            <td><button disabled pButton type="button" label="{{pontuacoes.indexOf(pontuacao) + 1 + 'º'}}"
-                        class="{{getPosicaoStyle(pontuacao)}} p-button-raised p-button-rounded"></button></td>
             <td>{{pontuacao.numero}} - {{pontuacao.nome}}</td>
             <td>{{pontuacao.gol}}</td>
             <td>{{pontuacao.assistencia}}</td>

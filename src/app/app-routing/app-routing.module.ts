@@ -22,6 +22,7 @@ import {CadastroCampeonatoComponent} from '../campeonato/cadastro-campeonato/cad
 import {CadastroJogadorComponent} from '../jogador/cadastro-jogador/cadastro-jogador.component';
 import {ListaPartidaComponent} from '../partida/lista-partida/lista-partida.component';
 import {CadastroPartidaComponent} from '../partida/cadastro-partida/cadastro-partida.component';
+import {TabelaComponent} from '../campeonato/tabela/tabela.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -35,6 +36,7 @@ const routes: Routes = [
   {path: 'campeonato/:idCampeonato/partida', component: ListaPartidaComponent, canActivate: [AuthGuard]},
   {path: 'campeonato/:idCampeonato/partida/novo', component: CadastroPartidaComponent, canActivate: [AuthGuard]},
   {path: 'campeonato/:idCampeonato/partida/:idPartida', component: CadastroPartidaComponent, canActivate: [AuthGuard]},
+  {path: 'campeonato/:idCampeonato/tabela', component: TabelaComponent, canActivate: [AuthGuard]},
 
   {path: 'aluno', component: ListaAlunoComponent, canActivate: [AuthGuard]},
   {path: 'aluno/novo', component: CadastroAlunoComponent, canActivate: [AuthGuard]},
