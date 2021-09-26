@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {PartidaService} from '../partida.service';
-import {ConfirmationService, MessageService} from 'primeng/api';
+import {ConfirmationService} from 'primeng/api';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Title} from '@angular/platform-browser';
 import {ErrorHandlerService} from '../../core/error-handler.service';
@@ -26,7 +26,6 @@ export class ListaPartidaComponent implements OnInit {
   filtro = new PartidaFiltro();
 
   constructor(private partidaService: PartidaService,
-              private messageService: MessageService,
               private rout: ActivatedRoute,
               private router: Router,
               private title: Title,
@@ -72,7 +71,26 @@ export class ListaPartidaComponent implements OnInit {
   }
 
   confirmarExclusao(partida: any): void {
-    console.log('Excluido: ', partida.idPartida);
+    this.confirmation.confirm({
+      icon: 'pi pi-info-circle',
+      header: 'Confirmar exclusão!',
+      message: 'Você tem certeza de que deseja excluir?',
+      accept: () => {
+        this.excluir(partida);
+      },
+      acceptLabel: 'Sim',
+      rejectLabel: 'Não',
+      acceptButtonStyleClass: 'p-button-info p-button-rounded',
+      rejectButtonStyleClass: 'botao-excluir p-button-danger p-button-rounded'
+    });
+  }
+
+  excluir(partida: any): void {
+    this.partidaService.excluir(this.idCampeonato, partida.idPartida)
+      .then(() => {
+        this.consultar();
+        this.handler.addSuccess('Sucesso', 'Removido com sucesso');
+      }).catch(error => this.handler.handle(error));
   }
 
   private cleanList(): void {

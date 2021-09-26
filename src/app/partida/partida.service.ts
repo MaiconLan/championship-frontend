@@ -99,4 +99,16 @@ export class PartidaService {
         return Promise.reject(error);
       });
   }
+
+  excluir(idCampeonato: number, idPartida: number): Promise<void> {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json');
+
+    return this.http.delete(`${this.url}/${idCampeonato}/partida/${idPartida}`, {headers})
+      .toPromise()
+      .then(() => null)
+      .catch(error => {
+        return Promise.reject(error);
+      });
+  }
 }

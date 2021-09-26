@@ -76,7 +76,6 @@ export class CadastroCampeonatoComponent implements OnInit {
 
   atualizar(): void {
     this.campeonatoService.atualizar(this.campeonato).then(response => {
-      console.log('Atualizar campeonato: ', this.campeonato.inicio);
       this.handler.addSuccess('Atualizado', 'Registro atualizado com sucesso');
       this.converter(response);
     }).catch(error => {
