@@ -1,19 +1,14 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
+import {HttpHeaders} from '@angular/common/http';
 import {FacialHttp} from '../seguranca/facial-http';
 import {environment} from '../../environments/environment';
-import {HttpHeaders, HttpParams} from '@angular/common/http';
-import {Aluno, Campeonato} from '../core/model';
-
-export class CampeonatoFiltro {
-  nome: string;
-  pagina = 0;
-  itensPorPagina = 10;
-}
+import {PartidaFiltro} from './lista-partida/lista-partida.component';
+import {Partida, Pontuacao} from '../core/model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CampeonatoService {
+export class PartidaService {
 
   url: string;
 
@@ -21,31 +16,11 @@ export class CampeonatoService {
     this.url = `${environment.apiUrl}/campeonato`;
   }
 
-  consultar(filtro: CampeonatoFiltro): Promise<any> {
-    const headers = new HttpHeaders()
-      .append('Content-Type', 'application/json');
-    let params = new HttpParams();
-
-    params = params.set('page', filtro.pagina.toString());
-    params = params.set('size', filtro.itensPorPagina.toString());
-
-    if (filtro.nome) {
-      params = params.set('nome', filtro.nome);
-    }
-
-    return this.http.get<any>(this.url, {params, headers})
-      .toPromise()
-      .then(response => response)
-      .catch(error => {
-        return Promise.reject(error);
-      });
-  }
-
-  buscar(id: number): Promise<any> {
+  consultar(idCampeonato: number, filtro: PartidaFiltro): Promise<any> {
     const headers = new HttpHeaders()
       .append('Content-Type', 'application/json');
 
-    return this.http.get<any>(`${this.url}/${id}`, {headers})
+    return this.http.get<any>(`${this.url}/${idCampeonato}/partida`, {headers})
       .toPromise()
       .then(response => {
         return response;
@@ -55,11 +30,11 @@ export class CampeonatoService {
       });
   }
 
-  criar(campeonato: Campeonato): Promise<any> {
+  buscar(idCampeonato: number, id: number): Promise<any> {
     const headers = new HttpHeaders()
       .append('Content-Type', 'application/json');
 
-    return this.http.post<any>(`${this.url}`, JSON.stringify(campeonato), {headers})
+    return this.http.get<any>(`${this.url}/${idCampeonato}/partida/${id}`, {headers})
       .toPromise()
       .then(response => {
         return response;
@@ -69,11 +44,11 @@ export class CampeonatoService {
       });
   }
 
-  atualizar(campeonato: Campeonato): Promise<any> {
+  buscarPontuacoes(idCampeonato: number, id: number): Promise<any> {
     const headers = new HttpHeaders()
       .append('Content-Type', 'application/json');
 
-    return this.http.put<any>(`${this.url}/${campeonato.idCampeonato}`, JSON.stringify(campeonato), {headers})
+    return this.http.get<any>(`${this.url}/${idCampeonato}/partida/${id}/pontuacao`, {headers})
       .toPromise()
       .then(response => {
         return response;
@@ -83,24 +58,12 @@ export class CampeonatoService {
       });
   }
 
-
-  excluir(id: number): Promise<void> {
+  salvarPontuacao(idCampeonato: number, idPartida: number, pontuacao: Pontuacao): Promise<any> {
     const headers = new HttpHeaders()
       .append('Content-Type', 'application/json');
 
-    return this.http.delete(`${this.url}/${id}`, {headers})
-      .toPromise()
-      .then(() => null)
-      .catch(error => {
-        return Promise.reject(error);
-      });
-  }
-
-  listarJogadores(id: number): Promise<any> {
-    const headers = new HttpHeaders()
-      .append('Content-Type', 'application/json');
-
-    return this.http.get<any>(`${this.url}/${id}/jogador`, {headers})
+    return this.http.put<any>(`${this.url}/${idCampeonato}/partida/${idPartida}/pontuacao/jogador/${pontuacao.idJogador}`,
+      JSON.stringify(pontuacao), {headers})
       .toPromise()
       .then(response => {
         return response;
@@ -110,11 +73,25 @@ export class CampeonatoService {
       });
   }
 
-  buscarTabela(id: number): Promise<any> {
+  criar(idCampeonato: number, partida: Partida): Promise<any> {
     const headers = new HttpHeaders()
       .append('Content-Type', 'application/json');
 
-    return this.http.get<any>(`${this.url}/${id}/tabela`, {headers})
+    return this.http.post<any>(`${this.url}/${idCampeonato}/partida`, JSON.stringify(partida), {headers})
+      .toPromise()
+      .then(response => {
+        return response;
+      })
+      .catch(error => {
+        return Promise.reject(error);
+      });
+  }
+
+  atualizar(idCampeonato: number, partida: Partida): Promise<any> {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json');
+
+    return this.http.put<any>(`${this.url}/${idCampeonato}/partida/${partida.idPartida}`, JSON.stringify(partida), {headers})
       .toPromise()
       .then(response => {
         return response;
