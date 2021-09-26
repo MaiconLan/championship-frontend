@@ -48,13 +48,23 @@ export class ListaPartidaComponent implements OnInit {
     this.partidaService.consultar(this.idCampeonato, this.filtro)
       .then(partidas => {
         this.totalRegistros = partidas.length;
-        this.partidas = partidas;
+        this.converter(partidas);
         this.loading = false;
       }).catch(error => {
       this.loading = false;
       this.handler.handle(error);
       this.cleanList();
     });
+  }
+
+  converter(response: any): void {
+    this.partidas = [];
+    for (const partida of response) {
+      this.partidas.push({
+        idPartida: partida.idPartida,
+        inicio: new Date(partida.inicio + 'Z')
+      });
+    }
   }
 
   aoMudarPagina(event: any): void {

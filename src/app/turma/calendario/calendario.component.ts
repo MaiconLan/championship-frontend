@@ -166,8 +166,6 @@ export class CalendarioComponent implements OnInit {
     this.aula.start = this.start.toLocaleTimeString();
     this.aula.end = this.end.toLocaleTimeString();
 
-    console.log('Aula String: ', JSON.stringify(this.aula));
-
     this.calendarioService.criarAula(this.idTurma, this.aula)
       .then(() => {
         this.addSuccess('Aula criada', 'Aula criada com sucesso');
@@ -187,7 +185,6 @@ export class CalendarioComponent implements OnInit {
     this.aula.start = this.start.toLocaleTimeString();
     this.aula.end = this.end.toLocaleTimeString();
 
-    console.log('Aula String: ', JSON.stringify(this.aula));
     this.calendarioService.editarAula(this.aula)
       .then(() => {
         this.listarAulas();

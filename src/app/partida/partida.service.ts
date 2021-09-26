@@ -90,7 +90,6 @@ export class PartidaService {
   atualizar(idCampeonato: number, partida: Partida): Promise<any> {
     const headers = new HttpHeaders()
       .append('Content-Type', 'application/json');
-
     return this.http.put<any>(`${this.url}/${idCampeonato}/partida/${partida.idPartida}`, JSON.stringify(partida), {headers})
       .toPromise()
       .then(response => {
