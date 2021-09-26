@@ -13,6 +13,7 @@
       <div class="p-col-12 p-md-4 p-lg-4">
         <label style="display: block">Início:</label>
         <p-calendar [(ngModel)]="campeonato.inicio" [style]="{'width': '100%'}"
+                    [locale]="pt"
                     name="inicio"
                     [showIcon]="true" dateFormat="dd/mm/yy"
                     required></p-calendar>
@@ -21,8 +22,10 @@
       <div class="p-col-12 p-md-4 p-lg-4">
         <label style="display: block">Término:</label>
         <p-calendar [(ngModel)]="campeonato.termino" [style]="{'width': '100%'}"
+                    [locale]="pt"
                     name="termino"
-                    showIcon="true" dateFormat="dd/mm/yy"></p-calendar>
+                    showIcon="true" dateFormat="dd/mm/yy"
+                    required></p-calendar>
       </div>
 
       <div class="p-col-12 p-md-12 p-lg-12">
@@ -36,16 +39,20 @@
           <button pButton icon="pi pi-save" type="submit" class="p-button-success p-button-rounded" label="Salvar"
                   [disabled]="f.invalid"></button>
         </span>
-        <span style="margin-right: 10px">
+        <span style="margin-right: 10px" [hidden]="!editando()">
           <button pButton icon="pi pi-user" type="submit" class="p-button-warning p-button-rounded"
-                  label="Novo Jogador"
-                  (click)="novoJogador()"
-                  [disabled]="f.invalid"></button>
+                  label="Adicionar Jogador"
+                  (click)="novoJogador()"></button>
         </span>
-        <span style="margin-right: 10px">
+        <span style="margin-right: 10px" [hidden]="!editando()">
            <button pButton pTooltip="Partidas" label="Partidas" tooltipPosition="top" icon="pi pi-calendar"
-                   class="p-button-help p-button-rounded"
+                   class="p-button-secondary p-button-rounded"
                    (click)="acessarPartidas()"></button>
+        </span>
+        <span style="margin-right: 10px" [hidden]="!editando()">
+          <a pButton pTooltip="Tabela geral do campeonato" label="Tabela" tooltipPosition="top" icon="pi pi-table"
+             class="botao-editar p-button-rounded p-button-help"
+             [routerLink]="['tabela']"></a>
         </span>
         <a routerLink="/campeonato" style="margin-left: 5px;" class="voltarPesquisa">Voltar para a pesquisa</a>
       </div>

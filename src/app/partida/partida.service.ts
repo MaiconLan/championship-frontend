@@ -90,12 +90,23 @@ export class PartidaService {
   atualizar(idCampeonato: number, partida: Partida): Promise<any> {
     const headers = new HttpHeaders()
       .append('Content-Type', 'application/json');
-
     return this.http.put<any>(`${this.url}/${idCampeonato}/partida/${partida.idPartida}`, JSON.stringify(partida), {headers})
       .toPromise()
       .then(response => {
         return response;
       })
+      .catch(error => {
+        return Promise.reject(error);
+      });
+  }
+
+  excluir(idCampeonato: number, idPartida: number): Promise<void> {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json');
+
+    return this.http.delete(`${this.url}/${idCampeonato}/partida/${idPartida}`, {headers})
+      .toPromise()
+      .then(() => null)
       .catch(error => {
         return Promise.reject(error);
       });

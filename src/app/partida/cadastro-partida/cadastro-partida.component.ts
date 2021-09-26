@@ -29,6 +29,8 @@ export class CadastroPartidaComponent implements OnInit {
     {label: 'Derrota', value: false},
   ];
 
+  pt: any;
+
   constructor(private messageService: MessageService,
               private partidaService: PartidaService,
               private rout: ActivatedRoute,
@@ -42,11 +44,29 @@ export class CadastroPartidaComponent implements OnInit {
     this.title.setTitle('Cadastro de jogador');
     this.idCampeonato = this.rout.snapshot.params.idCampeonato;
     const idPartida = this.rout.snapshot.params.idPartida;
+    this.configure();
 
     if (idPartida) {
       this.loading = true;
       this.buscar(idPartida);
     }
+  }
+
+  configure(): void {
+    this.pt = {
+      firstDayOfWeek: 0,
+      dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+      dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+      dayNamesMin: ['Do', 'Se', 'Te', 'Qua', 'Qui', 'Se', 'Sa'],
+      monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+      monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+      today: 'Hoje',
+      clear: 'Limpar',
+      dateFormat: 'mm/dd/yy',
+      weekHeader: 'Sem',
+      timezone: 'America/Sao_Paulo',
+      locale: 'pt'
+    };
   }
 
   salvar(): void {
@@ -62,6 +82,7 @@ export class CadastroPartidaComponent implements OnInit {
       .then(response => {
         this.partida = this.converter(response);
         this.buscarPontuacoes(this.partida.idPartida);
+        this.handler.addSuccess('Atualizado', 'Registro atualizado com sucesso');
       }).catch(error => {
       this.handler.handle(error);
       this.loading = false;
@@ -120,13 +141,8 @@ export class CadastroPartidaComponent implements OnInit {
   converter(response: any): Partida {
     const partida = new Partida();
     partida.idPartida = response.idPartida;
-    partida.inicio = new Date(response.inicio);
+    partida.inicio = new Date(response.inicio + 'Z');
     return partida;
-  }
-
-  getPosicaoStyle(pontuacao: any): string {
-    const posicao = this.pontuacoes.indexOf(pontuacao) + 1;
-    return posicao === 1 ? 'p-button-success' : posicao === 2 ? 'p-button-warning' : posicao === 3 ? 'p-button-danger' : 'p-button-primary';
   }
 
   mostrarModalEditar(pontuacao: any): void {

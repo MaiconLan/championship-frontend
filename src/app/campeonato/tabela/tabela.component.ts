@@ -16,7 +16,7 @@ export class TabelaComponent implements OnInit {
 
   pontuacoes = [];
 
-  campeonato: Campeonato;
+  campeonato = new Campeonato();
   quantidadePontuacoes: number;
 
   constructor(private partidaService: PartidaService,
@@ -60,8 +60,8 @@ export class TabelaComponent implements OnInit {
     this.campeonato = new Campeonato();
     this.campeonato.idCampeonato = response.idCampeonato;
     this.campeonato.nome = response.nome;
-    this.campeonato.inicio = new Date(response.inicio);
-    this.campeonato.termino = new Date(response.termino);
+    this.campeonato.inicio = new Date(response.inicio + 'Z');
+    this.campeonato.termino = new Date(response.termino + 'Z');
     this.campeonato.finalizado = Boolean(response.finalizado);
   }
 

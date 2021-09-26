@@ -1,7 +1,7 @@
 <div class="container">
   <h1>Tabela {{campeonato.nome}} de {{campeonato.inicio | date : 'dd/MM/yyyy'}} a {{campeonato.termino | date : 'dd/MM/yyyy'}}</h1>
 
-  <a routerLink="/campeonato" style="margin-left: 5px;" class="voltarPesquisa">Voltar para a pesquisa</a>
+  <a [routerLink]="['..']" style="margin-left: 5px;" class="voltarPesquisa">Voltar para campeonato</a>
 
   <div class="p-grid">
     <div class="p-col-12 p-md-12 p-lg-12">
@@ -26,8 +26,8 @@
             <th>Nome</th>
             <th>Gols</th>
             <th>Assistências</th>
-            <th>Pontuação</th>
             <th>Vitórias</th>
+            <th>Pontuação</th>
             <th>Partidas</th>
           </tr>
         </ng-template>
@@ -39,8 +39,8 @@
             <td>{{pontuacao.numero}} - {{pontuacao.nome}}</td>
             <td>{{pontuacao.gol}}</td>
             <td>{{pontuacao.assistencia}}</td>
-            <td>{{pontuacao.pontuacao}}</td>
             <td>{{pontuacao.vitoria}}</td>
+            <td>{{pontuacao.pontuacao}}</td>
             <td>{{pontuacao.partida}}</td>
           </tr>
         </ng-template>
