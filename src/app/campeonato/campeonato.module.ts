@@ -13,24 +13,27 @@ import { CadastroCampeonatoComponent } from './cadastro-campeonato/cadastro-camp
 import {CalendarModule} from 'primeng/calendar';
 import {InputTextModule} from 'primeng/inputtext';
 import {SelectButtonModule} from 'primeng/selectbutton';
+import {PickListModule} from 'primeng/picklist';
+import { TabelaComponent } from './tabela/tabela.component';
 
 
 
 @NgModule({
-  declarations: [ListaCampeonatoComponent, CadastroCampeonatoComponent],
-  imports: [
-    CommonModule,
-    ButtonModule,
-    TableModule,
-    FormsModule,
-    HttpClientModule,
-    RouterModule,
-    TooltipModule,
-    TabViewModule,
-    CalendarModule,
-    InputTextModule,
-    SelectButtonModule,
-  ],
+  declarations: [ListaCampeonatoComponent, CadastroCampeonatoComponent, TabelaComponent],
+    imports: [
+        CommonModule,
+        ButtonModule,
+        TableModule,
+        FormsModule,
+        HttpClientModule,
+        RouterModule,
+        TooltipModule,
+        TabViewModule,
+        CalendarModule,
+        InputTextModule,
+        SelectButtonModule,
+        PickListModule,
+    ],
   providers: [MessageService, ConfirmationService]
 })
 export class CampeonatoModule { }

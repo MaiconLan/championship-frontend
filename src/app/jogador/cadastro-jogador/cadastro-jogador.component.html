@@ -1,0 +1,30 @@
+<div class="container">
+  <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar()">
+    <div class="p-grid">
+      <div class="p-col-12 p-md-12 p-lg-12">
+        <h1>{{editando() ? 'Editar' : 'Cadastrar'}} Jogador</h1>
+      </div>
+
+      <div class="p-col-12 p-md-6 p-lg-4">
+        <label style="display: block">Nome:</label>
+        <input pInputText type="text" name="nome" [(ngModel)]="jogador.nome" required>
+      </div>
+
+      <div class="p-col-12 p-md-6 p-lg-4">
+        <label style="display: block">Número da camisa:</label>
+        <input pInputText type="number" name="numero" [(ngModel)]="jogador.numero"/>
+      </div>
+
+      <div class="p-col-12 p-md-12 p-lg-12">
+        <span class="p-buttonset">
+          <button pButton icon="pi pi-save" type="submit" class="p-button-success" label="Salvar"
+                  [disabled]="f.invalid"></button>
+          <button pButton icon="pi pi-plus" type="button" class="p-button-info" label="Novo"
+                  (click)="novo(f)"></button>
+        </span>
+        <a [routerLink]="['/', 'campeonato', idCampeonato]" style="margin-left: 5px;" class="voltarPesquisa">Voltar para o campeonato</a>
+      </div>
+    </div>
+
+  </form>
+</div>
