@@ -16,7 +16,7 @@ export class TabelaComponent implements OnInit {
 
   pontuacoes = [];
 
-  campeonato: Campeonato;
+  campeonato = new Campeonato();
   quantidadePontuacoes: number;
 
   constructor(private partidaService: PartidaService,
