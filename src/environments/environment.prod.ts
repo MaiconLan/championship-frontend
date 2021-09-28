@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://aw-championship.herokuapp.com/reconhecimento',
-  allowedDomains: [/aw-facial-recognition.herokuapp.com/],
-  disallowedRoutes: [/aw-facial-recognition.herokuapp.com\/oauth\/token/]
+  apiUrl: 'https://ml-championship-api.herokuapp.com/championship',
+  allowedDomains: [/ml-championship-api.herokuapp.com/],
+  disallowedRoutes: [/ml-championship-api.herokuapp.com\/oauth\/token/]
 };
