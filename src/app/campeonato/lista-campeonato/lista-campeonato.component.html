@@ -50,11 +50,11 @@
             <td>{{campeonato.nome}}</td>
             <td>{{campeonato.inicio}}</td>
             <td>{{campeonato.termino}}</td>
-            <td [hidden]="!campeonato.finalizado">
+            <td [hidden]="campeonato.finalizado">
               <button disabled pButton type="button" label="Em andamento"
                       class="p-button-success p-button-raised p-button-rounded p-button-outlined"></button>
             </td>
-            <td [hidden]="campeonato.finalizado">
+            <td [hidden]="!campeonato.finalizado">
               <button disabled pButton type="button" label="Finalizado"
                       class="p-button-danger p-button-raised p-button-rounded p-button-outlined"></button>
             </td>
