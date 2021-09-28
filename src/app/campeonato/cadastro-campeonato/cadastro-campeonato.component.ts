@@ -20,7 +20,7 @@ export class CadastroCampeonatoComponent implements OnInit {
 
   status = [
     {label: 'Finalizado', value: true, style: 'background-color: blue;'},
-    {label: 'Não Finalizado', value: false, style: 'background-color: red;'},
+    {label: 'Em andamento', value: false, style: 'background-color: red;'},
   ];
 
   pt: any;
