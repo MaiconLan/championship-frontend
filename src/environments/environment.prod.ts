@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://championship-frontend.herokuapp.com/championship',
-  allowedDomains: [/championship-frontend.herokuapp.com/],
-  disallowedRoutes: [/championship-frontend.herokuapp.com\/oauth\/token/]
+  apiUrl: 'https://ml-championship-api.herokuapp.com/championship',
+  allowedDomains: [/ml-championship-api.herokuapp.com/],
+  disallowedRoutes: [/ml-championship-api.herokuapp.com\/oauth\/token/]
 };
