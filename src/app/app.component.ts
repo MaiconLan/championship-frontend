@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.appVersion = '1.5.0';
+    this.appVersion = '1.5.1';
     this.color = 'blue';
 
     this.appVersion = `https://img.shields.io/badge/Vers%C3%A3o-${this.appVersion}-${this.color}` ;
