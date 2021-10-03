@@ -1,0 +1,9 @@
+footer {
+  padding: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  left: 48%;
+  bottom: 0;
+  position: absolute;
+}

@@ -1,7 +1,5 @@
 import {Component} from '@angular/core';
 import {AuthService} from '../auth.service';
-import {HttpClient} from '@angular/common/http';
-import {MessageService} from 'primeng/api';
 import {Router} from '@angular/router';
 import {ErrorHandlerService} from '../../core/error-handler.service';
 

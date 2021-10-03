@@ -92,3 +92,13 @@ export class Pontuacao {
   constructor() {
   }
 }
+
+export class Usuario {
+  idUsuario: number;
+  nome: string;
+  email: string;
+  senha: string;
+
+  constructor() {
+  }
+}

@@ -3,6 +3,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {environment} from '../../environments/environment';
+import {Usuario} from '../core/model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +11,13 @@ import {environment} from '../../environments/environment';
 export class AuthService {
 
   oauthTokenUrl: string;
+  usuarioUrl: string;
   jwtPayload: any;
 
   constructor(private http: HttpClient,
               private jwtHelper: JwtHelperService) {
     this.oauthTokenUrl = `${environment.apiUrl}/oauth/token`;
+    this.usuarioUrl = `${environment.apiUrl}/usuario`;
     this.carregarToken();
   }
 
@@ -92,4 +95,19 @@ export class AuthService {
     return this.jwtPayload?.idUsuario;
   }
 
+  cadastrarUsuario(usuario: Usuario): Promise<any> {
+    const headers = new HttpHeaders()
+      .append('Authorization', 'Basic ' + btoa('angular:angular'))
+      .append('Content-Type', 'application/json');
+
+    return this.http.post<any>(`${this.usuarioUrl}/cadastro`, JSON.stringify(usuario),
+      { headers })
+      .toPromise()
+      .then(response => {
+        return response;
+      })
+      .catch(error => {
+        return Promise.reject(error);
+      });
+  }
 }
