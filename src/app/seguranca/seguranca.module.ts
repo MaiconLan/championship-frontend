@@ -11,13 +11,15 @@ import {environment} from '../../environments/environment';
 import {AuthGuard} from './auth.guard';
 import {LogoutService} from './logout.service';
 import {HttpsRequestInterceptor} from './interceptor';
+import { CadastroUsuarioComponent } from './cadastro-usuario/cadastro-usuario.component';
+import {RouterModule} from '@angular/router';
 
 export function tokenGetter(): string {
   return localStorage.getItem('token');
 }
 
 @NgModule({
-  declarations: [LoginFormComponent],
+  declarations: [LoginFormComponent, CadastroUsuarioComponent],
   imports: [
     CommonModule,
     InputTextModule,
@@ -32,6 +34,7 @@ export function tokenGetter(): string {
         disallowedRoutes: environment.disallowedRoutes
       }
     }),
+    RouterModule,
   ],
   providers: [
     AuthGuard,

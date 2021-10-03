@@ -15,10 +15,15 @@
                  ngModel required #senha>
         </div>
 
-        <div class="p-col-12 p-md-12 p-lg-12">
+        <div class="p-col-12 p-md-12 p-lg-4">
           <button pButton type="submit" label="Login" [disabled]="f.invalid"
                   (click)="login(usuario.value, senha.value); senha.value = ''"></button>
         </div>
+
+        <div class="p-col-12 p-md-12 p-lg-8">
+          <a routerLink="/usuario/cadastro" style="margin-left: 5px;" class="voltarPesquisa">Clique aqui para se cadastrar</a>
+        </div>
+
       </div>
     </form>
 
