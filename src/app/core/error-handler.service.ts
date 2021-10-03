@@ -18,6 +18,10 @@ export class ErrorHandlerService {
     this.messageService.add({severity: 'success', summary: title, detail: message, life: 3000});
   }
 
+  addError(title: string, message: string): void {
+    this.messageService.add({severity: 'error', summary: title, detail: message, life: 3000});
+  }
+
   handle(errorResponse: any): void {
     let msg: string;
 
