@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.appVersion = '1.5.1';
+    this.appVersion = '1.5.2';
     this.color = 'blue';
     this.apiColorcolor = 'cian';
 
