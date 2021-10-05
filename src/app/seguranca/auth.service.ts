@@ -12,24 +12,37 @@ export class AuthService {
 
   oauthTokenUrl: string;
   usuarioUrl: string;
+  healthCheckUrl: string;
   jwtPayload: any;
 
   constructor(private http: HttpClient,
               private jwtHelper: JwtHelperService) {
     this.oauthTokenUrl = `${environment.apiUrl}/oauth/token`;
     this.usuarioUrl = `${environment.apiUrl}/usuario`;
+    this.healthCheckUrl = `${environment.apiUrl}/health-check`;
     this.carregarToken();
   }
 
-  login(usuario: string, senha: string): Promise<void> {
-    const headers = new HttpHeaders()
+  private getHeadersUrlEncoded(): HttpHeaders {
+    return new HttpHeaders()
       .append('Authorization', 'Basic ' + btoa('angular:angular'))
       .append('Content-Type', 'application/x-www-form-urlencoded');
+  }
+
+  private getHeadersJson(): HttpHeaders {
+    return new HttpHeaders()
+      .append('Authorization', 'Basic ' + btoa('angular:angular'))
+      .append('Content-Type', 'application/json');
+  }
+
+  login(usuario: string, senha: string): Promise<void> {
+    const headers = this.getHeadersUrlEncoded();
+
     this.limparAcessToken();
     const body = `username=${usuario}&password=${senha}&grant_type=password`;
 
     return this.http.post<any>(this.oauthTokenUrl, body,
-      { headers, withCredentials: true })
+      {headers, withCredentials: true})
       .toPromise()
       .then(response => {
         this.armazenarToken(response.access_token);
@@ -67,13 +80,12 @@ export class AuthService {
   }
 
   obterNovoAccessToken(): Promise<void> {
-    const headers = new HttpHeaders()
-      .append('Authorization', 'Basic ' + btoa('angular:angular'))
-      .append('Content-Type', 'application/x-www-form-urlencoded');
+    const headers = this.getHeadersUrlEncoded();
+
     const body = 'grant_type=refresh_token';
 
     return this.http.post<any>(this.oauthTokenUrl, body,
-      { headers, withCredentials: true })
+      {headers, withCredentials: true})
       .toPromise()
       .then(response => {
         this.armazenarToken(response.access_token);
@@ -96,12 +108,24 @@ export class AuthService {
   }
 
   cadastrarUsuario(usuario: Usuario): Promise<any> {
-    const headers = new HttpHeaders()
-      .append('Authorization', 'Basic ' + btoa('angular:angular'))
-      .append('Content-Type', 'application/json');
+    const headers = this.getHeadersJson();
 
     return this.http.post<any>(`${this.usuarioUrl}/cadastro`, JSON.stringify(usuario),
-      { headers })
+      {headers})
+      .toPromise()
+      .then(response => {
+        return response;
+      })
+      .catch(error => {
+        return Promise.reject(error);
+      });
+  }
+
+  getApiVersion(): Promise<any> {
+    const headers = this.getHeadersJson();
+
+    return this.http.get<any>(`${this.healthCheckUrl}/version`,
+      {headers})
       .toPromise()
       .then(response => {
         return response;

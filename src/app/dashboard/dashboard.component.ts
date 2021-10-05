@@ -15,7 +15,7 @@ export class DashboardComponent implements OnInit {
   cardsPc = [
     {
       id: 1,
-      title: 'Alunos sem Foto',
+      title: 'Campeonatos em andamento',
       cols: 2,
       rows: 1,
       mostrarModal: false,
@@ -25,7 +25,7 @@ export class DashboardComponent implements OnInit {
     },
     {
       id: 2,
-      title: 'Alunos cadastrados',
+      title: 'Campeonatos finalizados',
       cols: 1,
       rows: 1,
       mostrarModal: false,
@@ -35,7 +35,7 @@ export class DashboardComponent implements OnInit {
     },
     {
       id: 3,
-      title: 'Profs. cadastrados',
+      title: 'Partidas da semana',
       cols: 2,
       rows: 1,
       mostrarModal: false,
@@ -44,7 +44,7 @@ export class DashboardComponent implements OnInit {
     },
     {
       id: 4,
-      title: 'Aulas do dia',
+      title: 'Jogadores cadastrados',
       cols: 1,
       rows: 1,
       mostrarModal: false,
@@ -56,7 +56,7 @@ export class DashboardComponent implements OnInit {
   cardsMobile = [
     {
       id: 1,
-      title: 'Alunos sem Foto',
+      title: 'Campeonatos em andamento',
       cols: 1,
       rows: 1,
       mostrarModal: false,
@@ -66,7 +66,7 @@ export class DashboardComponent implements OnInit {
     },
     {
       id: 2,
-      title: 'Alunos cadastrados',
+      title: 'Campeonatos finalizados',
       cols: 1,
       rows: 1,
       mostrarModal: false,
@@ -76,7 +76,7 @@ export class DashboardComponent implements OnInit {
     },
     {
       id: 3,
-      title: 'Profs. cadastrados',
+      title: 'Partidas da semana',
       cols: 1,
       rows: 1,
       mostrarModal: false,
@@ -85,7 +85,7 @@ export class DashboardComponent implements OnInit {
     },
     {
       id: 4,
-      title: 'Aulas do dia',
+      title: 'Jogadores cadastrados',
       cols: 1,
       rows: 1,
       mostrarModal: false,
@@ -118,52 +118,31 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    for (const card of this.cardsPc) {
-      if (card.id === 1) {
-        this.dashboardService.getAlunoDashboard()
-          .then(response => {
-            card.numero = response.alunosSemFotos;
-          });
-      } else if (card.id === 2) {
-        this.dashboardService.getAlunoDashboard()
-          .then(response => {
-            card.numero = response.alunosCadastrados;
-          });
-      } else if (card.id === 3) {
-        this.dashboardService.getProfessorDashboard()
-          .then(response => {
-            card.numero = response.professoresCadastrados;
-          });
-      } else if (card.id === 4) {
-        this.dashboardService.getAulasDashboard()
-          .then(response => {
-            card.numero = response.aulasDoDia;
-          });
-      }
-    }
+    this.dashboardService.getDadosDashboard()
+      .then(response => {
+        for (const card of this.cardsPc) {
+          if (card.id === 1) {
+            card.numero = response.campeonatosEmAndamento;
+          } else if (card.id === 2) {
+            card.numero = response.campeonatosFinalizados;
+          } else if (card.id === 3) {
+            card.numero = response.jogadores;
+          } else if (card.id === 4) {
+            card.numero = response.partidasNaSemana;
+          }
+        }
 
-    for (const card of this.cardsMobile) {
-      if (card.id === 1) {
-        this.dashboardService.getAlunoDashboard()
-          .then(response => {
-            card.numero = response.alunosSemFotos;
-          });
-      } else if (card.id === 2) {
-        this.dashboardService.getAlunoDashboard()
-          .then(response => {
-            card.numero = response.alunosCadastrados;
-          });
-      } else if (card.id === 3) {
-        this.dashboardService.getProfessorDashboard()
-          .then(response => {
-            card.numero = response.professoresCadastrados;
-          });
-      } else if (card.id === 4) {
-        this.dashboardService.getAulasDashboard()
-          .then(response => {
-            card.numero = response.aulasDoDia;
-          });
-      }
-    }
+        for (const card of this.cardsMobile) {
+          if (card.id === 1) {
+            card.numero = response.campeonatosEmAndamento;
+          } else if (card.id === 2) {
+            card.numero = response.campeonatosFinalizados;
+          } else if (card.id === 3) {
+            card.numero = response.jogadores;
+          } else if (card.id === 4) {
+            card.numero = response.partidasNaSemana;
+          }
+        }
+      });
   }
 }
