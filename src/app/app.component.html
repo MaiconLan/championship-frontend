@@ -3,7 +3,15 @@
 <p-dialog></p-dialog>
 <router-outlet></router-outlet>
 <footer class="footer">
-  <img [src]="appVersion"/>
+  <div>
+    <span [hidden]="apiError">
+        <img [src]="appVersion"/>
+    </span>
+
+    <span [hidden]="apiError" style="margin-left: 5px">
+      <img [src]="apiVersion"/>
+    </span>
+  </div>
 </footer>
 
 <p-toast></p-toast>

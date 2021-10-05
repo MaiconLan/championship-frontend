@@ -3,7 +3,7 @@ footer {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  left: 48%;
+  left: 45%;
   bottom: 0;
-  position: absolute;
+  position: relative;
 }
