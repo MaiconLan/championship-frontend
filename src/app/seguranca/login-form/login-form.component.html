@@ -17,7 +17,8 @@
 
         <div class="p-col-12 p-md-12 p-lg-4">
           <button pButton type="submit" label="Login" [disabled]="f.invalid"
-                  (click)="login(usuario.value, senha.value); senha.value = ''"></button>
+                  (click)="login(usuario.value, senha.value); senha.value = ''"
+                  id="login"></button>
         </div>
 
         <div class="p-col-12 p-md-12 p-lg-8">
