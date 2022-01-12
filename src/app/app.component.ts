@@ -9,31 +9,11 @@ import {AuthService} from './seguranca/auth.service';
 })
 export class AppComponent implements OnInit {
   title = 'championship-frontend';
-  appVersion: string;
-  apiVersion: string;
-  apiError = true;
-  color: string;
-  apiColorcolor: string;
 
-  constructor(private primengConfig: PrimeNGConfig,
-              private auth: AuthService) {
+  constructor(private primengConfig: PrimeNGConfig) {
   }
 
   ngOnInit(): void {
-    this.appVersion = '1.5.2';
-    this.color = 'blue';
-    this.apiColorcolor = 'cian';
-
-    this.auth.getApiVersion().then(response => {
-      this.apiVersion = response.version;
-      this.apiVersion = `https://img.shields.io/badge/Vers%C3%A3o Api-${this.apiVersion}-${this.apiColorcolor}`;
-      this.apiError = false;
-    }).catch(error => {
-      console.log('Erro ', error);
-      this.apiError = true;
-    });
-
-    this.appVersion = `https://img.shields.io/badge/Vers%C3%A3o App-${this.appVersion}-${this.color}`;
     this.primengConfig.ripple = true;
   }
 }
