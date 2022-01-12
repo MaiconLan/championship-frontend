@@ -25,7 +25,7 @@ export class SidebarComponent implements OnInit {
               private auth: AuthService) { }
 
   ngOnInit(): void {
-    this.appVersion = '1.5.3';
+    this.appVersion = '1.5.4';
     this.color = 'blue';
     this.apiColorcolor = 'navy';
 
