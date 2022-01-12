@@ -12,13 +12,33 @@ import {Router} from '@angular/router';
 export class SidebarComponent implements OnInit {
 
   exibindoMenu: boolean;
+  appVersion: string;
+  apiVersion: string;
+  apiError = true;
+  color: string;
+  apiColorcolor: string;
 
   constructor(public authService: AuthService,
               private logoutService: LogoutService,
               private errorHandler: ErrorHandlerService,
-              private router: Router) { }
+              private router: Router,
+              private auth: AuthService) { }
 
   ngOnInit(): void {
+    this.appVersion = '1.5.3';
+    this.color = 'blue';
+    this.apiColorcolor = 'navy';
+
+    this.auth.getApiVersion().then(response => {
+      this.apiVersion = response.version;
+      this.apiVersion = `https://img.shields.io/badge/Vers%C3%A3o Api-${this.apiVersion}-${this.apiColorcolor}`;
+      this.apiError = false;
+    }).catch(error => {
+      console.log('Erro ', error);
+      this.apiError = true;
+    });
+
+    this.appVersion = `https://img.shields.io/badge/Vers%C3%A3o App-${this.appVersion}-${this.color}`;
   }
 
   logout(): void {

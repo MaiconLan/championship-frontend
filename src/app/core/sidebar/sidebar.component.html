@@ -17,17 +17,25 @@
       <p-button *ngIf="mostrarBotaoMenu()" icon="pi pi-times" [style]="{'float': 'right'}" (click)="exibindoMenu = !exibindoMenu"></p-button>
 
       <div class="navbar-usuario">
-        {{ authService.jwtPayload?.nome }}
+        <a style="text-decoration: none; color: white;" [routerLink]="['usuario', 'cadastro', authService.jwtPayload?.idUsuario]"><i class="pi pi-user"></i> {{ authService.jwtPayload?.nome }}</a>
       </div>
 
       <div class="navbar-menuitem" routerLinkActive="ativo">
-        <a routerLink="/campeonato" *ngIf="mostrarBotaoMenu()" (click)="exibindoMenu = !exibindoMenu">Campeonatos</a>
+        <a routerLink="/campeonato" *ngIf="mostrarBotaoMenu()" (click)="exibindoMenu = !exibindoMenu"><i class="pi pi-list"></i> Campeonatos</a>
       </div>
 
-      <div class="navbar-menuitem" routerLinkActive="ativo">
-        <a routerLink="#" (click)="logout()">Logout</a>
+      <div class="navbar-menuitem logout" routerLinkActive="ativo">
+        <a routerLink="#" (click)="logout()"><i class="pi pi-sign-out"></i> Logout</a>
       </div>
+    </div>
 
+    <div style="position: fixed; bottom: 0px">
+      <span [hidden]="apiError">
+      <img [src]="appVersion"/>
+      </span>
+      <span [hidden]="apiError">
+        <img [src]="apiVersion"/>
+      </span>
     </div>
   </p-sidebar>
 </nav>

@@ -54,3 +54,21 @@
 ::ng-deep .navbar-menuitem.ativo {
   background-color: #494541;
 }
+
+::ng-deep .navbar-menuitem.logout {
+  padding: 15px;
+  color: #ff272f;
+}
+
+::ng-deep .navbar-menuitem.logout a {
+  color: #ff272f;
+  text-decoration: none;
+}
+
+::ng-deep .navbar-menuitem a:hover {
+  color: #b6000a;
+}
+
+::ng-deep .navbar-menuitem.ativo {
+  background-color: #494541;
+}

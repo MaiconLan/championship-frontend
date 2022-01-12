@@ -2,3 +2,14 @@
   align-items: center;
   display: flex;
 }
+
+.centralizar {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.login {
+  border: solid 1px #1e94d2;
+  border-radius: 5px;
+  padding: 20px;
+}
