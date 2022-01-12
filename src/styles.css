@@ -41,13 +41,24 @@ input {
   border-radius: 5px;
 }
 
-a.voltarPesquisa:link {
-  text-decoration:none;
+a.link {
+  text-decoration: none;
+  color: #32b2fa;
 }
 
-a.voltarPesquisa:visited {
-  text-decoration:none;
-  color: #404C51;
+a.link:visited {
+  text-decoration: none;
+}
+
+a.link:hover {
+  text-decoration: underline;
+  color: #0094cb;
+}
+
+/* selected link */
+a.link:active {
+  text-decoration: underline;
+  color: #0094cb;
 }
 
 html, body { height: 100%; }

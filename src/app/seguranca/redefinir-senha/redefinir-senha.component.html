@@ -1,0 +1,20 @@
+<div class="container" style="max-width: 400px; margin: auto">
+  <form #f="ngForm" autocomplete="off">
+    <div class="p-grid">
+      <div class="p-col-12 p-md-12 p-lg-12">
+        <h1>Redefinir senha</h1>
+      </div>
+    </div>
+
+    <div class="p-col-12 p-md-12 p-lg-12">
+      <label style="display: block">Nova Senha:</label>
+      <input id="novaSenha" type="password" pPassword name="novaSenha" [(ngModel)]="novaSenha" required/>
+    </div>
+
+    <div class="p-col-12 p-md-12 p-lg-4 centralizar">
+      <button pButton type="submit" label="Recuperar" [disabled]="f.invalid"
+              (click)="redefinir()"
+              id="redefinir"></button>
+    </div>
+  </form>
+</div>

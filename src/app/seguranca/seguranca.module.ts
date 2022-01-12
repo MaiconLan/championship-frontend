@@ -13,13 +13,15 @@ import {LogoutService} from './logout.service';
 import {HttpsRequestInterceptor} from './interceptor';
 import { CadastroUsuarioComponent } from './cadastro-usuario/cadastro-usuario.component';
 import {RouterModule} from '@angular/router';
+import { RecuperarSenhaComponent } from './recuperar-senha/recuperar-senha.component';
+import { RedefinirSenhaComponent } from './redefinir-senha/redefinir-senha.component';
 
 export function tokenGetter(): string {
   return localStorage.getItem('token');
 }
 
 @NgModule({
-  declarations: [LoginFormComponent, CadastroUsuarioComponent],
+  declarations: [LoginFormComponent, CadastroUsuarioComponent, RecuperarSenhaComponent, RedefinirSenhaComponent],
   imports: [
     CommonModule,
     InputTextModule,
