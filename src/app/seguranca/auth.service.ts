@@ -29,6 +29,12 @@ export class AuthService {
       .append('Content-Type', 'application/x-www-form-urlencoded');
   }
 
+  private getBasicAuthHeaders(): HttpHeaders {
+    return new HttpHeaders()
+      .append('Authorization', 'Basic ' + btoa('angular:angular'))
+      .append('Content-Type', 'application/json');
+  }
+
   private getHeadersJson(): HttpHeaders {
     return new HttpHeaders()
       .append('Authorization', 'Basic ' + btoa('angular:angular'))
@@ -93,7 +99,7 @@ export class AuthService {
         return Promise.resolve(null);
       })
       .catch(response => {
-        console.error('Erro ao renovar token.', response);
+        console.error('Erro ao renovar token.', response.error);
         return Promise.resolve(null);
       });
   }
@@ -125,6 +131,64 @@ export class AuthService {
     const headers = this.getHeadersJson();
 
     return this.http.get<any>(`${this.healthCheckUrl}/version`,
+      {headers})
+      .toPromise()
+      .then(response => {
+        return response;
+      })
+      .catch(error => {
+        return Promise.reject(error);
+      });
+  }
+
+  buscarUsuario(): Promise<any> {
+    const headers = this.getHeadersJson();
+
+    return this.http.get<any>(`${this.usuarioUrl}`,
+      {headers})
+      .toPromise()
+      .then(response => {
+        return response;
+      })
+      .catch(error => {
+        return Promise.reject(error);
+      });
+  }
+
+  editarUsuario(usuario: Usuario): Promise<any> {
+    const headers = this.getHeadersJson();
+
+    return this.http.put<any>(`${this.usuarioUrl}/${usuario.idUsuario}`, JSON.stringify(usuario),
+      {headers})
+      .toPromise()
+      .then(response => {
+        return response;
+      })
+      .catch(error => {
+        return Promise.reject(error);
+      });
+  }
+
+  recuperar(email: any): Promise<any> {
+    const headers = this.getBasicAuthHeaders();
+    const body = {email};
+
+    return this.http.post<any>(`${this.usuarioUrl}/recuperar`, JSON.stringify(body),
+      {headers})
+      .toPromise()
+      .then(response => {
+        return response;
+      })
+      .catch(error => {
+        return Promise.reject(error);
+      });
+  }
+
+  redefinir(novaSenha: string, codigoRecuperacao: string): Promise<any> {
+    const headers = this.getBasicAuthHeaders();
+    const body = {novaSenha, codigoRecuperacao};
+
+    return this.http.post<any>(`${this.usuarioUrl}/redefinir`, JSON.stringify(body),
       {headers})
       .toPromise()
       .then(response => {

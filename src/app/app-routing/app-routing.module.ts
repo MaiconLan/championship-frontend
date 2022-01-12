@@ -24,11 +24,17 @@ import {ListaPartidaComponent} from '../partida/lista-partida/lista-partida.comp
 import {CadastroPartidaComponent} from '../partida/cadastro-partida/cadastro-partida.component';
 import {TabelaComponent} from '../campeonato/tabela/tabela.component';
 import {CadastroUsuarioComponent} from '../seguranca/cadastro-usuario/cadastro-usuario.component';
+import {RecuperarSenhaComponent} from "../seguranca/recuperar-senha/recuperar-senha.component";
+import {RedefinirSenhaComponent} from "../seguranca/redefinir-senha/redefinir-senha.component";
 
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'login', component: LoginFormComponent},
   {path: 'usuario/cadastro', component: CadastroUsuarioComponent},
+  {path: 'usuario/recuperar', component: RecuperarSenhaComponent},
+  {path: 'usuario/redefinir/:codigoRecuperacao', component: RedefinirSenhaComponent},
+  {path: 'usuario/senha', component: RecuperarSenhaComponent},
+  {path: 'usuario/cadastro/:idUsuario', component: CadastroUsuarioComponent},
   {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
   {path: 'campeonato', component: ListaCampeonatoComponent, canActivate: [AuthGuard]},
   {path: 'campeonato/novo', component: CadastroCampeonatoComponent, canActivate: [AuthGuard]},
@@ -56,7 +62,7 @@ const routes: Routes = [
   {path: 'turma/:idTurma/aula/:idAula', component: AulaComponent, canActivate: [AuthGuard]},
   {path: 'exportacao', component: ExportacaoComponent, canActivate: [AuthGuard]},
   {path: 'exportacao/aula', component: ExportarAulasComponent, canActivate: [AuthGuard]},
-  {path: 'pagina-nao-encontrada', component: PaginaNaoEncontradaComponent, canActivate: [AuthGuard]},
+  {path: 'pagina-nao-encontrada', component: PaginaNaoEncontradaComponent},
   {path: '**', redirectTo: 'pagina-nao-encontrada'},
 ];
 

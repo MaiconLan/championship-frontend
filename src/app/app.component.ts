@@ -28,7 +28,6 @@ export class AppComponent implements OnInit {
       this.apiVersion = response.version;
       this.apiVersion = `https://img.shields.io/badge/Vers%C3%A3o Api-${this.apiVersion}-${this.apiColorcolor}`;
       this.apiError = false;
-      console.log('TESTE');
     }).catch(error => {
       console.log('Erro ', error);
       this.apiError = true;

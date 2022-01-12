@@ -19,21 +19,21 @@
 
       <div class="p-col-12 p-md-12 p-lg-12">
         <label style="display: block">Senha:</label>
-        <input pPassword type="password" name="senha" required [(ngModel)]="senha">
+        <input pPassword type="password" name="senha" [required]="!editando" [(ngModel)]="senha">
       </div>
 
       <div class="p-col-12 p-md-12 p-lg-12">
         <label style="display: block">Repetir Senha:</label>
-        <input pPassword type="password" name="repetirSenha" required [(ngModel)]="repetirSenha">
+        <input pPassword type="password" name="repetirSenha" [required]="!editando" [(ngModel)]="repetirSenha">
       </div>
 
       <div class="p-col-12 p-md-12 p-lg-4">
-        <button id="cadastrar" pButton type="submit" label="Cadastrar" [disabled]="f.invalid"
-                (click)="cadastrar()"></button>
+        <button id="cadastrar" pButton type="submit" [label]="editando ? 'Salvar' : 'Cadastrar'" [disabled]="f.invalid"
+                (click)="salvar()"></button>
       </div>
 
       <div class="p-col-12 p-md-12 p-lg-8">
-        <a routerLink="/login" style="margin-left: 5px;" class="voltarPesquisa">Voltar</a>
+        <a [routerLink]="editando ? ['/campeonato'] : ['/login']" style="margin-left: 5px;" class="link">Voltar</a>
       </div>
     </div>
   </form>

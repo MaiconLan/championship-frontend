@@ -17,7 +17,7 @@
       <p-button *ngIf="mostrarBotaoMenu()" icon="pi pi-times" [style]="{'float': 'right'}" (click)="exibindoMenu = !exibindoMenu"></p-button>
 
       <div class="navbar-usuario">
-        {{ authService.jwtPayload?.nome }}
+        <a style="text-decoration: none; color: white" [routerLink]="['usuario', 'cadastro', authService.jwtPayload?.idUsuario]">{{ authService.jwtPayload?.nome }}</a>
       </div>
 
       <div class="navbar-menuitem" routerLinkActive="ativo">
