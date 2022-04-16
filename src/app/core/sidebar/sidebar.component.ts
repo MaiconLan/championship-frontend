@@ -34,7 +34,6 @@ export class SidebarComponent implements OnInit {
       this.apiVersion = `https://img.shields.io/badge/Vers%C3%A3o Api-${this.apiVersion}-${this.apiColorcolor}`;
       this.apiError = false;
     }).catch(error => {
-      console.log('Erro ', error);
       this.apiError = true;
     });
 

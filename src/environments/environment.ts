@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   apiUrl: 'http://localhost:8080/championship',
+  frontendUrl: 'http://localhost:4200',
   allowedDomains: [/localhost:8080/],
   disallowedRoutes: [/localhost:8080\/oauth\/token/]
 };

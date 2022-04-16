@@ -120,29 +120,22 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.dashboardService.getDadosDashboard()
       .then(response => {
-        for (const card of this.cardsPc) {
-          if (card.id === 1) {
-            card.numero = response.campeonatosEmAndamento;
-          } else if (card.id === 2) {
-            card.numero = response.campeonatosFinalizados;
-          } else if (card.id === 3) {
-            card.numero = response.jogadores;
-          } else if (card.id === 4) {
-            card.numero = response.partidasNaSemana;
-          }
-        }
-
-        for (const card of this.cardsMobile) {
-          if (card.id === 1) {
-            card.numero = response.campeonatosEmAndamento;
-          } else if (card.id === 2) {
-            card.numero = response.campeonatosFinalizados;
-          } else if (card.id === 3) {
-            card.numero = response.jogadores;
-          } else if (card.id === 4) {
-            card.numero = response.partidasNaSemana;
-          }
-        }
+        this.createCards(this.cardsPc, response);
+        this.createCards(this.cardsMobile, response);
       });
+  }
+
+  createCards(cards: any, response: any): void {
+    for (const card of cards) {
+      if (card.id === 1) {
+        card.numero = response.campeonatosEmAndamento;
+      } else if (card.id === 2) {
+        card.numero = response.campeonatosFinalizados;
+      } else if (card.id === 3) {
+        card.numero = response.partidasNaSemana;
+      } else if (card.id === 4) {
+        card.numero = response.jogadores;
+      }
+    }
   }
 }
