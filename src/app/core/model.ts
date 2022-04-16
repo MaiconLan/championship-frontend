@@ -57,6 +57,7 @@ export class Campeonato {
   inicio: Date;
   termino: Date;
   finalizado: boolean;
+  codigoCompartilhamento: string;
 
   constructor() {
   }

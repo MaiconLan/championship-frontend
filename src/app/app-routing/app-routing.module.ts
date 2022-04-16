@@ -38,6 +38,7 @@ const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
   {path: 'campeonato', component: ListaCampeonatoComponent, canActivate: [AuthGuard]},
   {path: 'campeonato/novo', component: CadastroCampeonatoComponent, canActivate: [AuthGuard]},
+  {path: 'campeonato/tabela/:codigoCompartilhado', component: TabelaComponent},
   {path: 'campeonato/:idCampeonato', component: CadastroCampeonatoComponent, canActivate: [AuthGuard]},
   {path: 'campeonato/:idCampeonato/jogador/novo', component: CadastroJogadorComponent, canActivate: [AuthGuard]},
   {path: 'campeonato/:idCampeonato/jogador/:idJogador', component: CadastroJogadorComponent, canActivate: [AuthGuard]},

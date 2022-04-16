@@ -134,6 +134,7 @@ export class CadastroCampeonatoComponent implements OnInit {
     this.campeonato.inicio = new Date(response.inicio + 'T03:00:00Z');
     this.campeonato.termino = new Date(response.termino + 'T03:00:00Z');
     this.campeonato.finalizado = Boolean(response.finalizado);
+    this.campeonato.codigoCompartilhamento = response.codigoCompartilhamento;
   }
 
   confirmarExclusaoJogador(jogador: any): void {
