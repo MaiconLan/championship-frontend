@@ -1,7 +1,8 @@
 <div class="container">
-  <h1>Tabela {{campeonato.nome}} de {{campeonato.inicio | date : 'dd/MM/yyyy'}} a {{campeonato.termino | date : 'dd/MM/yyyy'}}</h1>
-
-  <a [routerLink]="['..']" style="margin-left: 5px;" class="link">Voltar para campeonato</a>
+  <div [hidden]="campeonato.idCampeonato == null">
+    <h1>Tabela {{campeonato.nome}} de {{campeonato.inicio | date : 'dd/MM/yyyy'}} a {{campeonato.termino | date : 'dd/MM/yyyy'}}</h1>
+    <a [routerLink]="['..']" style="margin-left: 5px;" class="link">Voltar para campeonato</a>
+  </div>
 
   <div class="p-grid">
     <div class="p-col-12 p-md-12 p-lg-12">
@@ -47,7 +48,7 @@
 
         <ng-template pTemplate="emptymessage">
           <tr>
-            <td [attr.colspan]="4">
+            <td [attr.colspan]="7">
               Nenhum registro encontrado.
             </td>
           </tr>

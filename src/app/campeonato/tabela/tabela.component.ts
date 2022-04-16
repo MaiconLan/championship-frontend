@@ -31,8 +31,11 @@ export class TabelaComponent implements OnInit {
   ngOnInit(): void {
     this.title.setTitle('Tabela do campeonato');
     const idCampeonato = this.rout.snapshot.params.idCampeonato;
+    const codigoCompartilhado = this.rout.snapshot.params.codigoCompartilhado;
     if (idCampeonato) {
       this.buscarCampeonato(idCampeonato);
+    } else if (codigoCompartilhado) {
+      this.buscarTabelaCompartilhada(codigoCompartilhado);
     }
   }
 
@@ -53,6 +56,17 @@ export class TabelaComponent implements OnInit {
         this.buscarPontuacoes(idCampeonato);
       }).catch(error => {
       this.handler.handle(error);
+    });
+  }
+
+  buscarTabelaCompartilhada(codigoCompartilhamento: any): void {
+    this.campeonatoService.buscarTabelaCompartilhada(codigoCompartilhamento)
+      .then(response => {
+        this.pontuacoes = response;
+        this.quantidadePontuacoes = this.pontuacoes.length;
+        this.campeonato = new Campeonato();
+      }).catch(error => {
+        this.handler.handle(error);
     });
   }
 

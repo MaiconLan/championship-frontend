@@ -3,6 +3,8 @@ import {Title} from '@angular/platform-browser';
 import {CampeonatoFiltro, CampeonatoService} from '../campeonato.service';
 import {ErrorHandlerService} from '../../core/error-handler.service';
 import {ConfirmationService, LazyLoadEvent, MessageService} from 'primeng/api';
+import {environment} from "../../../environments/environment";
+import {CdkCopyToClipboard, Clipboard} from "@angular/cdk/clipboard";
 
 @Component({
   selector: 'app-lista-campeonato',
@@ -11,6 +13,7 @@ import {ConfirmationService, LazyLoadEvent, MessageService} from 'primeng/api';
 })
 export class ListaCampeonatoComponent implements OnInit {
 
+  urlCompartilhamento = '';
   loading = false;
   totalRegistros = 0;
 
@@ -22,7 +25,8 @@ export class ListaCampeonatoComponent implements OnInit {
               private messageService: MessageService,
               private confirmation: ConfirmationService,
               private handler: ErrorHandlerService,
-              private campeonatoService: CampeonatoService) {
+              private campeonatoService: CampeonatoService,
+              private clipboard: Clipboard) {
   }
 
   ngOnInit(): void {
@@ -76,9 +80,33 @@ export class ListaCampeonatoComponent implements OnInit {
     this.campeonatoService.excluir(campeonato.idCampeonato).then(() => {
       this.consultar(this.filtro.pagina);
       this.handler.addSuccess('Sucesso', 'Registro excluído com sucesso');
+      this.loading = false;
     }).catch(error => {
       this.handler.handle(error);
+      this.loading = false;
     });
+  }
+
+  compartilhar(campeonato: any): void {
+    this.loading = true;
+
+    if (!campeonato.codigoCompartilhamento) {
+      this.campeonatoService.compartilhar(campeonato.idCampeonato).then(response => {
+        this.criarUrlCompartilhamento(response.codigoCompartilhamento);
+      }).catch(error => {
+        this.handler.handle(error);
+        this.loading = false;
+      });
+    } else {
+      this.criarUrlCompartilhamento(campeonato.codigoCompartilhamento);
+    }
+  }
+
+  private criarUrlCompartilhamento(codigoCompartilhamento): void {
+    this.urlCompartilhamento = `${environment.frontendUrl}/campeonato/tabela/${codigoCompartilhamento}`;
+    this.clipboard.copy(this.urlCompartilhamento);
+    this.handler.addSuccess('Copiado!', 'Copiado com sucesso para a área de transferência!');
     this.loading = false;
   }
+
 }

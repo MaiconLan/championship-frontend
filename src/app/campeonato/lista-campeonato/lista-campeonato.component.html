@@ -67,6 +67,9 @@
               <a pButton pTooltip="Tabela geral do campeonato" tooltipPosition="top" icon="pi pi-table"
                  class="botao-editar p-button-rounded p-button-help"
                  [routerLink]="[campeonato.idCampeonato, 'tabela']"></a>
+              <a pButton pTooltip="Compartilhar tabela" tooltipPosition="top" icon="pi pi-share-alt"
+                 class="botao-editar p-button-rounded p-button-warning"
+                 (click)="compartilhar(campeonato)"></a>
             </td>
           </tr>
         </ng-template>

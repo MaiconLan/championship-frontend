@@ -73,7 +73,6 @@ export class AulaComponent implements OnInit {
       this.title.setTitle('Aula');
       this.aula = response;
       this.totalRegistros = this.aula.presencas.length;
-      console.log(this.totalRegistros);
       this.loading = false;
     }).catch(error => this.handler.handle(error));
   }

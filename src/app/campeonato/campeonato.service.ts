@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import {FacialHttp} from '../seguranca/facial-http';
 import {environment} from '../../environments/environment';
-import {HttpHeaders, HttpParams} from '@angular/common/http';
-import {Aluno, Campeonato} from '../core/model';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {Campeonato} from '../core/model';
+import {AuthService} from "../seguranca/auth.service";
 
 export class CampeonatoFiltro {
   nome: string;
@@ -17,7 +18,9 @@ export class CampeonatoService {
 
   url: string;
 
-  constructor(private http: FacialHttp) {
+  constructor(private http: FacialHttp,
+              private httpClient: HttpClient,
+              private authService: AuthService) {
     this.url = `${environment.apiUrl}/campeonato`;
   }
 
@@ -115,6 +118,34 @@ export class CampeonatoService {
       .append('Content-Type', 'application/json');
 
     return this.http.get<any>(`${this.url}/${id}/tabela`, {headers})
+      .toPromise()
+      .then(response => {
+        return response;
+      })
+      .catch(error => {
+        return Promise.reject(error);
+      });
+  }
+
+  compartilhar(id): Promise<any> {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json');
+
+    return this.http.put<any>(`${this.url}/${id}/compartilhamento`, {}, {headers})
+      .toPromise()
+      .then(response => {
+        return response;
+      })
+      .catch(error => {
+        return Promise.reject(error);
+      });
+  }
+
+  buscarTabelaCompartilhada(codigoCompartilhamento: any): Promise<any> {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json');
+
+    return this.httpClient.get<any>(`${this.url}/tabela-compartilhada/${codigoCompartilhamento}`, {headers})
       .toPromise()
       .then(response => {
         return response;
