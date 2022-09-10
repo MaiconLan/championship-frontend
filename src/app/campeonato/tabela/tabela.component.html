@@ -25,11 +25,12 @@
           <tr>
             <th class="coluna-codigo">Posição</th>
             <th>Nome</th>
+            <th>Pontuação</th>
+            <th>Partidas</th>
             <th>Gols</th>
             <th>Assistências</th>
             <th>Vitórias</th>
-            <th>Pontuação</th>
-            <th>Partidas</th>
+            <th>Derrotas</th>
           </tr>
         </ng-template>
 
@@ -37,12 +38,13 @@
           <tr>
             <td><button disabled pButton type="button" label="{{pontuacoes.indexOf(pontuacao) + 1 + 'º'}}"
                         class="{{getPosicaoStyle(pontuacao)}} p-button-raised p-button-rounded"></button></td>
-            <td>{{pontuacao.numero}} - {{pontuacao.nome}}</td>
+            <td>{{pontuacao.nome}} ({{pontuacao.numero}})</td>
+            <td>{{pontuacao.pontuacao}}</td>
+            <td>{{pontuacao.partida}}</td>
             <td>{{pontuacao.gol}}</td>
             <td>{{pontuacao.assistencia}}</td>
             <td>{{pontuacao.vitoria}}</td>
-            <td>{{pontuacao.pontuacao}}</td>
-            <td>{{pontuacao.partida}}</td>
+            <td>{{pontuacao.derrota}}</td>
           </tr>
         </ng-template>
 

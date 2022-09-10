@@ -25,8 +25,9 @@ export class CadastroPartidaComponent implements OnInit {
   idCampeonato: number;
   modalEditar = false;
   statusPontuacao = [
-    {label: 'Vitória', value: true},
-    {label: 'Derrota', value: false},
+    {label: 'Vitória', value: 'VITORIA'},
+    {label: 'Derrota', value: 'DERROTA'},
+    {label: 'Falta', value: 'FALTA'},
   ];
 
   pt: any;
@@ -150,6 +151,34 @@ export class CadastroPartidaComponent implements OnInit {
     this.modalEditar = true;
   }
 
+  iconeResultado(status: any): string {
+    switch (status) {
+      case 'VITORIA': {
+        return 'pi pi-check';
+      }
+      case 'DERROTA': {
+        return 'pi pi-times';
+      }
+      case 'FALTA': {
+        return 'pi pi-exclamation-triangle';
+      }
+    }
+  }
+
+  classResultado(status: any): string {
+    switch (status) {
+      case 'VITORIA': {
+        return 'p-button-success p-button-raised p-button-rounded p-button-outlined';
+      }
+      case 'DERROTA': {
+        return 'p-button-danger p-button-raised p-button-rounded p-button-outlined';
+      }
+      case 'FALTA': {
+        return 'p-button-warning p-button-raised p-button-rounded p-button-outlined';
+      }
+    }
+  }
+
   salvarPontuacao(): void {
     this.loading = true;
     this.partidaService.salvarPontuacao(this.idCampeonato, this.partida.idPartida, this.pontuacao)
@@ -171,7 +200,7 @@ export class CadastroPartidaComponent implements OnInit {
     pontuacao.gol = p.gol;
     pontuacao.assistencia = p.assistencia;
     pontuacao.pontuacao = p.pontuacao;
-    pontuacao.vitoria = p.vitoria;
+    pontuacao.status = p.status;
     return pontuacao;
   }
 }
