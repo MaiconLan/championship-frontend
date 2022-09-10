@@ -88,7 +88,7 @@ export class Pontuacao {
   gol: number;
   assistencia: number;
   pontuacao: number;
-  vitoria: boolean;
+  status: string;
 
   constructor() {
   }

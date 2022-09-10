@@ -55,24 +55,22 @@
             <th>Gol</th>
             <th>Assistência</th>
             <th>Pontuação</th>
-            <th>Vitória</th>
+            <th>Resultado</th>
             <th class="coluna-acoes">Ações</th>
           </tr>
         </ng-template>
 
         <ng-template pTemplate="body" let-pontuacao>
           <tr>
-            <td>{{pontuacao.numero}} - {{pontuacao.nome}}</td>
+            <td>{{pontuacao.nome}} ({{pontuacao.numero}})</td>
             <td>{{pontuacao.gol}}</td>
             <td>{{pontuacao.assistencia}}</td>
             <td>{{pontuacao.pontuacao}}</td>
-            <td [hidden]="!pontuacao.vitoria">
-              <button disabled pButton type="button" icon="pi pi-check"
-                      class="p-button-success p-button-raised p-button-rounded p-button-outlined"></button>
-            </td>
-            <td [hidden]="pontuacao.vitoria">
-              <button disabled pButton type="button" icon="pi pi-times"
-                      class="p-button-danger p-button-raised p-button-rounded p-button-outlined"></button>
+            <td>
+              <div>
+                <button disabled pButton type="button" icon="{{iconeResultado(pontuacao.status)}}" label="{{pontuacao.status}}"
+                        class="{{classResultado(pontuacao.status)}}"></button>
+              </div>
             </td>
             <td>
               <a pButton pTooltip="Editar" tooltipPosition="top" icon="pi pi-pencil"
@@ -92,15 +90,11 @@
     </div>
   </div>
 
-  <p-dialog [style]="{'max-width': '90%', 'max-height': '90%'}" header="Pontuação" [(visible)]="modalEditar" [modal]="true"
+  <p-dialog [style]="{'max-width': '90%', 'max-height': '90%'}" header="Pontuação: {{pontuacao.nome}} ({{pontuacao.numero}})" [(visible)]="modalEditar" [modal]="true"
             [resizable]="false"
             [closeOnEscape]="true" [draggable]="false">
     <div class="container">
       <div class="p-grid">
-        <div class="p-col-12 p-md-4 p-lg-3">
-          <label style="display: block">Jogador:</label>
-          <label>{{pontuacao.numero}} - {{pontuacao.nome}}</label>
-        </div>
         <div class="p-col-12 p-md-4 p-lg-3">
           <label style="display: block">Gol:</label>
           <input pInputText type="text" name="nome" [(ngModel)]="pontuacao.gol">
@@ -111,7 +105,7 @@
         </div>
         <div class="p-col-12 p-md-4 p-lg-3">
           <label style="display: block">Status:</label>
-          <p-selectButton [options]="statusPontuacao" [(ngModel)]="pontuacao.vitoria"></p-selectButton>
+          <p-selectButton [options]="statusPontuacao" [(ngModel)]="pontuacao.status"></p-selectButton>
         </div>
 
         <div class="p-col-12 p-md-12 p-lg-12">
