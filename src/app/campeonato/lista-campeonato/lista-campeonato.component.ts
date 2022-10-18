@@ -5,6 +5,7 @@ import {ErrorHandlerService} from '../../core/error-handler.service';
 import {ConfirmationService, LazyLoadEvent, MessageService} from 'primeng/api';
 import {environment} from "../../../environments/environment";
 import {CdkCopyToClipboard, Clipboard} from "@angular/cdk/clipboard";
+import {Configuracao} from "../../core/model";
 
 @Component({
   selector: 'app-lista-campeonato',
@@ -18,11 +19,12 @@ export class ListaCampeonatoComponent implements OnInit {
   totalRegistros = 0;
 
   filtro = new CampeonatoFiltro();
+  configuracao = new Configuracao();
+  modalConfiguracao = false;
 
   campeonatos = [];
 
   constructor(private title: Title,
-              private messageService: MessageService,
               private confirmation: ConfirmationService,
               private handler: ErrorHandlerService,
               private campeonatoService: CampeonatoService,
@@ -42,12 +44,13 @@ export class ListaCampeonatoComponent implements OnInit {
       .then(response => {
         this.totalRegistros = response.length;
         this.campeonatos = response;
+        this.loading = false;
       }).catch(error => {
       this.handler.handle(error);
       this.cleanList();
+      this.loading = false;
     });
 
-    this.loading = false;
   }
 
   private cleanList(): void {
@@ -109,4 +112,44 @@ export class ListaCampeonatoComponent implements OnInit {
     this.loading = false;
   }
 
+  mostrarModalConfiguracao(campeonato: any): void {
+    this.loading = true;
+
+    this.campeonatoService.buscarConfiguracao(campeonato.idCampeonato)
+      .then(response => {
+        this.configuracao = response;
+        this.modalConfiguracao = true;
+        this.loading = false;
+      }).catch(error => {
+        this.modalConfiguracao = false;
+        this.handler.handle(error);
+        this.loading = false;
+    });
+  }
+
+  editarConfiguracao(): void {
+    this.loading = true;
+    this.campeonatoService.editarConfiguracao(this.configuracao)
+      .then(() => {
+        this.loading = false;
+        this.handler.addSuccess('Salvo com sucesso', 'A pontuação foi salva com sucesso!');
+      }).catch(error => {
+        this.handler.handle(error);
+        this.loading = false;
+    });
+  }
+
+  recalcularPontuacao(): void {
+    this.loading = true;
+    this.campeonatoService.recalcularPontuacao(this.configuracao.idCampeonato)
+      .then(() => {
+        this.configuracao = new Configuracao();
+        this.modalConfiguracao = false;
+        this.loading = false;
+        this.handler.addSuccess('Recalculado com sucesso', 'A pontuação foi recalculada com sucesso!');
+      }).catch(error => {
+      this.handler.handle(error);
+      this.loading = false;
+    });
+  }
 }

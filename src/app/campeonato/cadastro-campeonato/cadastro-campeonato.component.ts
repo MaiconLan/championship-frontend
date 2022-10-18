@@ -159,4 +159,8 @@ export class CadastroCampeonatoComponent implements OnInit {
   acessarPartidas(): void {
     this.router.navigate(['..', 'campeonato', this.campeonato.idCampeonato, 'partida']);
   }
+
+  desabilitarCampos(): boolean {
+    return this.campeonato.finalizado;
+  }
 }

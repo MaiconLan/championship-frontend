@@ -7,7 +7,7 @@
 
       <div class="p-col-12 p-md-6 p-lg-4">
         <label style="display: block">Nome:</label>
-        <input pInputText type="text" name="nome" [(ngModel)]="campeonato.nome" required>
+        <input pInputText type="text" name="nome" [(ngModel)]="campeonato.nome" [disabled]="desabilitarCampos()" required>
       </div>
 
       <div class="p-col-12 p-md-4 p-lg-4">
@@ -16,6 +16,7 @@
                     [locale]="pt"
                     name="inicio"
                     [showIcon]="true" dateFormat="dd/mm/yy"
+                    [disabled]="desabilitarCampos()"
                     required></p-calendar>
       </div>
 
@@ -25,6 +26,7 @@
                     [locale]="pt"
                     name="termino"
                     showIcon="true" dateFormat="dd/mm/yy"
+                    [disabled]="desabilitarCampos()"
                     required></p-calendar>
       </div>
 
@@ -42,6 +44,7 @@
         <span style="margin-right: 10px" [hidden]="!editando()">
           <button pButton icon="pi pi-user" type="submit" class="p-button-warning p-button-rounded"
                   label="Adicionar Jogador"
+                  [disabled]="desabilitarCampos()"
                   (click)="novoJogador()"></button>
         </span>
         <span style="margin-right: 10px" [hidden]="!editando()">
@@ -92,10 +95,15 @@
             <td>{{jogador.nome}}</td>
             <td>{{jogador.numero}}</td>
             <td>
-              <a pButton pTooltip="Editar" tooltipPosition="top" icon="pi pi-pencil"
-                 class="botao-editar p-button-rounded" [routerLink]="['jogador', jogador.idJogador]"></a>
+              <button pButton pTooltip="Editar" tooltipPosition="top" icon="pi pi-pencil"
+                      class="p-botao-editar p-button-info p-button-rounded"
+                      [disabled]="desabilitarCampos()"
+                      [routerLink]="['jogador', jogador.idJogador]">
+              </button>
+
               <button pButton pTooltip="Excluir" tooltipPosition="top" icon="pi pi-trash"
                       class="botao-excluir p-button-danger p-button-rounded"
+                      [disabled]="desabilitarCampos()"
                       (click)="confirmarExclusaoJogador(jogador)"></button>
             </td>
           </tr>
