@@ -70,6 +70,9 @@
               <a pButton pTooltip="Compartilhar tabela" tooltipPosition="top" icon="pi pi-share-alt"
                  class="botao-editar p-button-rounded p-button-warning"
                  (click)="compartilhar(campeonato)"></a>
+              <a pButton pTooltip="Configurar pontuação" tooltipPosition="top" icon="pi pi-cog"
+                 class="botao-editar p-button-rounded p-button-secondary"
+                 (click)="mostrarModalConfiguracao(campeonato)"></a>
             </td>
           </tr>
         </ng-template>
@@ -84,4 +87,38 @@
       </p-table>
     </div>
   </div>
+
+  <p-dialog [style]="{'max-width': '90%', 'max-height': '90%'}" header="Configuração de pontuação"
+            [(visible)]="modalConfiguracao"
+            [modal]="true"
+            [resizable]="false"
+            [closeOnEscape]="true" [draggable]="false">
+    <div class="container">
+      <div class="p-grid">
+          <div class="p-col-12 p-md-4 p-lg-4">
+            <label style="display: block">Gol:</label>
+            <input pInputText type="text" name="gol" [(ngModel)]="configuracao.gol">
+          </div>
+          <div class="p-col-12 p-md-4 p-lg-4">
+            <label style="display: block">Assistência:</label>
+            <input pInputText type="text" name="assistencia" [(ngModel)]="configuracao.assistencia">
+          </div>
+        <div class="p-col-12 p-md-4 p-lg-4">
+          <label style="display: block">Vitória:</label>
+          <input pInputText type="text" name="vitoria" [(ngModel)]="configuracao.vitoria">
+        </div>
+        <div class="p-col-6 p-md-4 p-lg-2">
+          <button pButton icon="pi pi-check" type="submit"
+                  class="p-button-success p-button-rounded"
+                  label="Salvar" (click)="editarConfiguracao()"></button>
+        </div>
+        <div class="p-col-6 p-md-4 p-lg-2">
+            <button pButton icon="pi pi-check" type="submit"
+                    class="p-button-warning p-button-rounded"
+                    label="Recalcular" (click)="recalcularPontuacao()"></button>
+        </div>
+      </div>
+    </div>
+  </p-dialog>
+
 </div>
