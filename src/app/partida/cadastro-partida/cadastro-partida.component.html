@@ -18,13 +18,13 @@
       <div class="p-col-12 p-md-12 p-lg-12">
         <span style="margin-right: 10px">
           <button pButton icon="pi pi-save" type="submit" class="p-button-success p-button-rounded" label="Salvar"
-                  [disabled]="f.invalid"></button>
+                  [disabled]="f.invalid || desabilitarCampos()"></button>
         </span>
         <span style="margin-right: 10px">
           <button pButton icon="pi pi-calendar" type="submit" class="p-button-warning p-button-rounded"
                   label="Nova Partida"
                   (click)="novaPartida(f)"
-                  [disabled]="f.invalid"></button>
+                  [disabled]="f.invalid || desabilitarCampos()"></button>
         </span>
         <a [routerLink]="['/campeonato', idCampeonato, 'partida']" style="margin-left: 5px;" class="link">Voltar para partidas</a>
       </div>

@@ -103,3 +103,13 @@ export class Usuario {
   constructor() {
   }
 }
+
+export class Configuracao {
+  idCampeonato = 0;
+  gol = 0;
+  assistencia = 0;
+  vitoria = 0;
+
+  constructor() {
+  }
+}

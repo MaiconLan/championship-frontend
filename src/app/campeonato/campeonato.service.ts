@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {FacialHttp} from '../seguranca/facial-http';
 import {environment} from '../../environments/environment';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {Campeonato} from '../core/model';
+import {Campeonato, Configuracao} from '../core/model';
 import {AuthService} from "../seguranca/auth.service";
 
 export class CampeonatoFiltro {
@@ -146,6 +146,48 @@ export class CampeonatoService {
       .append('Content-Type', 'application/json');
 
     return this.httpClient.get<any>(`${this.url}/tabela-compartilhada/${codigoCompartilhamento}`, {headers})
+      .toPromise()
+      .then(response => {
+        return response;
+      })
+      .catch(error => {
+        return Promise.reject(error);
+      });
+  }
+
+  buscarConfiguracao(idCampeonato): Promise<any> {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json');
+
+    return this.httpClient.get<any>(`${this.url}/${idCampeonato}/configuracao`, {headers})
+      .toPromise()
+      .then(response => {
+        return response;
+      })
+      .catch(error => {
+        return Promise.reject(error);
+      });
+  }
+
+  editarConfiguracao(configuracao: Configuracao): Promise<any> {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json');
+
+    return this.httpClient.put<any>(`${this.url}/${configuracao.idCampeonato}/configuracao`, JSON.stringify(configuracao), {headers})
+      .toPromise()
+      .then(response => {
+        return response;
+      })
+      .catch(error => {
+        return Promise.reject(error);
+      });
+  }
+
+  recalcularPontuacao(idCampeonato: number): Promise<any> {
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/json');
+
+    return this.httpClient.put<any>(`${this.url}/${idCampeonato}/configuracao/calculo-pontuacao`, {headers})
       .toPromise()
       .then(response => {
         return response;

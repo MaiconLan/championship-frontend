@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {Partida, Pontuacao} from '../../core/model';
+import {Campeonato, Partida, Pontuacao} from '../../core/model';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Title} from '@angular/platform-browser';
 import {ErrorHandlerService} from '../../core/error-handler.service';
 import {PartidaService} from '../partida.service';
 import {NgForm} from '@angular/forms';
+import {CampeonatoService} from "../../campeonato/campeonato.service";
 
 @Component({
   selector: 'app-cadastro-partida',
@@ -15,6 +16,7 @@ import {NgForm} from '@angular/forms';
 export class CadastroPartidaComponent implements OnInit {
 
   partida = new Partida();
+  campeonato = new Campeonato();
   pontuacoes = [];
 
   pontuacao = new Pontuacao();
@@ -34,6 +36,7 @@ export class CadastroPartidaComponent implements OnInit {
 
   constructor(private messageService: MessageService,
               private partidaService: PartidaService,
+              private campeonatoService: CampeonatoService,
               private rout: ActivatedRoute,
               private router: Router,
               private title: Title,
@@ -49,7 +52,7 @@ export class CadastroPartidaComponent implements OnInit {
 
     if (idPartida) {
       this.loading = true;
-      this.buscar(idPartida);
+      this.carregarDados(idPartida);
     }
   }
 
@@ -134,8 +137,8 @@ export class CadastroPartidaComponent implements OnInit {
         this.quantidadePontuacoes = this.pontuacoes.length;
         this.loading = false;
       }).catch(error => {
-      this.handler.handle(error);
-      this.loading = false;
+        this.handler.handle(error);
+        this.loading = false;
     });
   }
 
@@ -202,5 +205,20 @@ export class CadastroPartidaComponent implements OnInit {
     pontuacao.pontuacao = p.pontuacao;
     pontuacao.status = p.status;
     return pontuacao;
+  }
+
+  desabilitarCampos(): boolean {
+    return this.campeonato.finalizado;
+  }
+
+  private carregarDados(idPartida: number): void {
+    this.campeonatoService.buscar(this.idCampeonato)
+      .then(response => {
+        this.campeonato = response;
+        this.buscar(idPartida);
+      }).catch(error => {
+      this.handler.handle(error);
+      this.loading = false;
+    });
   }
 }
